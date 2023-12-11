@@ -4,12 +4,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage.tsx';
 import App from './App.tsx';
 import './index.css';
+import Auth from './pages/Auth.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: 'auth',
+    element: <Auth />,
   },
 ]);
 
