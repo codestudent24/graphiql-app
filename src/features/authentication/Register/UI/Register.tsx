@@ -1,11 +1,13 @@
 import { useRef } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase-config';
 
-export default function Register() {
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../../shared/firebase-config';
+
+export function Register() {
   const registerMail = useRef<HTMLInputElement>(null);
   const registerPassword = useRef<HTMLInputElement>(null);
 
+  // По хорошему вынести в model ее
   const register = async () => {
     if (registerMail.current && registerPassword.current) {
       try {

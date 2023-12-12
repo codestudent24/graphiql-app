@@ -1,11 +1,13 @@
 import { useRef } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase-config';
 
-export default function Login() {
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../../shared/firebase-config';
+
+export function Login() {
   const loginMail = useRef<HTMLInputElement>(null);
   const loginPassword = useRef<HTMLInputElement>(null);
 
+  // По хорошему вынести в model ее
   const login = async () => {
     if (loginMail.current && loginPassword.current) {
       try {

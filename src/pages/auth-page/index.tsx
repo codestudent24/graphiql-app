@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase-config';
-import { useAppDispatch } from '../redux/hooks';
-import { addUser, removeUser } from '../redux/authSlice';
-import Register from '../components/Auth/Register';
-import Login from '../components/Auth/Login';
+import { auth } from '../../shared/firebase-config';
+
+import { useAppDispatch } from '../../app/appHooks';
+import { addUser, removeUser } from '../../app/authSlice';
+
+import { Register } from '../../features/authentication/Register';
+import { Login } from '../../features/authentication/Login';
 
 const CURRENT_USER = 'currentUser';
 

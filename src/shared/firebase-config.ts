@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { API_KEY, AUTH_DOMAIN, PROJECT_ID } from './share/const';
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID } from './constants';
 
 const firebaseConfig = {
   apiKey: API_KEY,
