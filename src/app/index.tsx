@@ -5,6 +5,9 @@ import ErrorPage from '../pages/error-page';
 import { BaseLayout } from './layouts/baseLayout';
 import MainPage from '../pages/main-page';
 
+import '../app/styles/fonts.scss';
+import '../app/styles/App.scss';
+
 function App() {
   return (
     <>

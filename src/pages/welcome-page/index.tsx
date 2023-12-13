@@ -1,7 +1,13 @@
+import { DevBlock } from '../../widgets/dev-block/UI/dev-block';
+import { WelcomeBlock } from '../../widgets/welcome-block';
+
+import styles from './welcome-page.module.scss';
+
 export default function WelcomePage() {
   return (
-    <div className="welcome">
-      <h2>WELCOME-PAGE</h2>
+    <div className={styles.welcome}>
+      <WelcomeBlock />
+      <DevBlock />
     </div>
   );
 }

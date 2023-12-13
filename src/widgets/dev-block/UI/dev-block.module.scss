@@ -1,0 +1,39 @@
+.developers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 15px;
+
+  .title {
+    text-align: left;
+    font-size: 8vw;
+    margin: 0;
+  }
+  .list {
+    height: 400px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    row-gap: 30px;
+  }
+}
+
+@media (max-width: 980px) {
+  .developers {
+    .title {
+      text-align: center;
+    }
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+
+      gap: 30px;
+    }
+  }
+}
