@@ -1,8 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import Header from '../../../../features/Header';
+
 export function BaseLayout() {
   return (
     <>
-      <header>header</header>
+      <Header />
       <main>
         <Outlet />
       </main>

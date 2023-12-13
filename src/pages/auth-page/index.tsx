@@ -8,16 +8,18 @@ import { addUser, removeUser } from '../../app/authSlice';
 
 import { Register } from '../../features/authentication/Register';
 import { Login } from '../../features/authentication/Login';
+import { useEffect } from 'react';
 
 const CURRENT_USER = 'currentUser';
 
 export default function AuthPage() {
   const { isAnonymous } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  if (!isAnonymous) navigate('/');
-
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!isAnonymous) navigate('/');
+  }, [navigate, isAnonymous]);
 
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser === null) {
@@ -31,14 +33,13 @@ export default function AuthPage() {
           uid: currentUser.uid,
         }),
       );
-      navigate('/');
     }
   });
 
   return (
     <div className="auth">
-      <Register />
       <Login />
+      <Register />
     </div>
   );
 }

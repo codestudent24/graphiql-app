@@ -1,15 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import App from '../';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../appStore';
+import App from '../';
 
 describe('App tests', () => {
   it('displays correct component', () => {
     render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>,
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+        ,
+      </Provider>,
     );
-    const divText = screen.getByText(/go to auth page/i);
+    const divText = screen.getByText(/welcome-page/i);
     expect(divText).not.toBeNull();
   });
 });

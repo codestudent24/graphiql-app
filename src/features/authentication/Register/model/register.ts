@@ -1,14 +1,22 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { ValidationError } from 'yup';
 import { auth } from '../../../../shared/firebase-config';
+import { authSchema } from '../../../../shared/validation';
 
 export const register = async (
-  mail: React.RefObject<HTMLInputElement>,
-  password: React.RefObject<HTMLInputElement>,
+  mailRef: React.RefObject<HTMLInputElement>,
+  passwordRef: React.RefObject<HTMLInputElement>,
 ) => {
-  if (mail.current && password.current) {
+  if (mailRef.current && passwordRef.current) {
+    const mail = mailRef.current.value;
+    const password = passwordRef.current.value;
     try {
-      createUserWithEmailAndPassword(auth, mail.current.value, password.current.value);
+      await authSchema.validate({ mail, password });
+      createUserWithEmailAndPassword(auth, mail, password);
     } catch (error) {
+      if (error instanceof ValidationError) {
+        return `Error: ${error.message}`;
+      }
       console.log(error);
     }
   }
