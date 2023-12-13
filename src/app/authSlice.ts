@@ -3,24 +3,33 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface authState {
   email: string | null;
   uid: string | null;
+  isAnonymous: boolean;
 }
 
 const initialState: authState = {
   email: null,
   uid: null,
+  isAnonymous: true,
+};
+
+type AddUserPayloadType = {
+  email: string | null;
+  uid: string;
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<authState>) => {
+    addUser: (state, action: PayloadAction<AddUserPayloadType>) => {
       state.email = action.payload.email;
       state.uid = action.payload.uid;
+      state.isAnonymous = false;
     },
     removeUser: (state) => {
       state.email = null;
       state.uid = null;
+      state.isAnonymous = true;
     },
   },
 });
