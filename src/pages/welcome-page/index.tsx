@@ -5,7 +5,7 @@ import styles from './welcome-page.module.scss';
 
 export default function WelcomePage() {
   return (
-    <div className={styles.welcome}>
+    <div className={styles.container}>
       <WelcomeBlock />
       <DevBlock />
     </div>
