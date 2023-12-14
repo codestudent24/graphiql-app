@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Header from '../../../../features/Header';
 
 import styles from './baseLayout.module.scss';
+import { Footer } from '../../../../widgets/footer';
 
 export function BaseLayout() {
   return (
@@ -10,7 +11,7 @@ export function BaseLayout() {
       <main className={styles.wrapper}>
         <Outlet />
       </main>
-      <footer className={styles.footer}>footer</footer>
+      <Footer />
     </>
   );
 }
