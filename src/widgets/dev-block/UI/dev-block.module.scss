@@ -5,9 +5,10 @@
 
   gap: 15px;
 
+  margin: 40px 0;
   height: 100%;
   .title {
-    text-align: left;
+    text-align: center;
     font-size: 7vw;
     margin: 0;
   }
@@ -26,6 +27,20 @@
   .developers {
     .title {
       text-align: center;
+    }
+    .list {
+      justify-content: center;
+
+      gap: 30px;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .developers {
+    .title {
+      text-align: center;
+      font-size: 8vw;
     }
     .list {
       justify-content: center;
