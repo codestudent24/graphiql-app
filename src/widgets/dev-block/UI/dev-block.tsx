@@ -6,11 +6,12 @@ export function DevBlock() {
     { nick: 'asmat1k', name: 'Tim Dobrov' },
     { nick: 'codestudent24', name: 'Denis Goncharenko' },
     { nick: 'Irina0313', name: 'Iryna Kanavalchuk' },
+    { nick: 'rolling-scopes-school', name: 'React Course' },
   ];
 
   return (
     <div className={styles.developers}>
-      <h2 className={styles.title}>OUR TEAM</h2>
+      <h2 className={styles.title}>ABOUT US</h2>
       <div className={styles.list}>
         {developers.map((item, index) => {
           return <DevCard key={index} nick={item.nick} name={item.name} />;
