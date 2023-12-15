@@ -8,7 +8,6 @@ export function WelcomeBlock() {
   return (
     <div className={styles.welcome}>
       <h2 className={styles.title}>GRAPHI-QL EDITOR</h2>
-      <h4 className={styles.subtitle}>Go ahead and test it in our special editor</h4>
       {isAnonymous ? (
         <div className={styles.links}>
           <Link className={styles.btn} to="/auth">

@@ -14,7 +14,7 @@ describe('App tests', () => {
         ,
       </Provider>,
     );
-    const divText = screen.getByText(/main/i);
+    const divText = screen.getByText(/Sign In/i);
     expect(divText).not.toBeNull();
   });
 });
