@@ -1,4 +1,7 @@
 .welcome {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
 
@@ -19,6 +22,14 @@
     color: #888888;
 
     margin: 0;
+  }
+  .links {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    gap: 20px;
   }
   .btn {
     cursor: pointer;
