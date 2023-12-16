@@ -20,9 +20,7 @@ export function ProjectBlock({ language }: ProjectBlockProps) {
     <div className={styles.container}>
       <div className={styles.info}>
         <h4 className={styles.name}>GRAPHI QL</h4>
-        <div className={styles.text} style={isEn ? { fontSize: 25 } : { fontSize: 20, letterSpacing: 1.5 }}>
-          {content}
-        </div>
+        <div className={`${styles.text} ${isEn ? '' : styles.rus}`}>{content}</div>
       </div>
     </div>
   );

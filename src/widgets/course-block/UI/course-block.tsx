@@ -17,9 +17,7 @@ export function CourseBlock({ language }: CourseBlockProps) {
     <div className={styles.container}>
       <div className={styles.info}>
         <h4 className={styles.name}>React 2023 Q4</h4>
-        <div className={styles.text} style={isEn ? { fontSize: 25 } : { fontSize: 20, letterSpacing: 1.5 }}>
-          {content}
-        </div>
+        <div className={`${styles.text} ${isEn ? '' : styles.rus}`}>{content}</div>
       </div>
     </div>
   );

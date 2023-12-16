@@ -24,8 +24,22 @@
     .text {
       font-size: 25px;
 
-      min-height: 165px;
+      min-height: 185px;
       max-width: 60%;
+    }
+    .rus {
+      font-size: 20px;
+      letter-spacing: 1.5px;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    .info {
+      .text {
+        min-height: 235px;
+      }
     }
   }
 }
@@ -47,8 +61,27 @@
       .text {
         font-size: 20px;
 
-        min-height: 291px;
+        min-height: 160px;
         max-width: 90%;
+      }
+      .rus {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .container {
+    .info {
+      .text {
+        font-size: 20px;
+
+        min-height: 221px;
+        max-width: 90%;
+      }
+      .rus {
+        font-size: 15px;
       }
     }
   }
