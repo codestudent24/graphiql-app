@@ -4,11 +4,19 @@ import { useLogout } from '../model/logout';
 import styles from './header.module.scss';
 import { useState } from 'react';
 import { LoginOutlined, LogoutOutlined, HomeOutlined, UserAddOutlined } from '@ant-design/icons';
+import { useLanguage } from '../../language/language-context';
 
 export function Header() {
   const logout = useLogout();
-  const { isAnonymous } = useAppSelector((state) => state.auth);
+  const { language, changeLanguage } = useLanguage();
   const [sticky, setSticky] = useState(false);
+
+  const { isAnonymous } = useAppSelector((state) => state.auth);
+
+  function toggleLanguage() {
+    const newLanguage = language === 'EN' ? 'RU' : 'EN';
+    changeLanguage(newLanguage);
+  }
 
   function updateSticky() {
     if (window.scrollY >= 20) {
@@ -28,8 +36,8 @@ export function Header() {
         </Link>
       </div>
       <div className={styles.item}>
-        <button className={styles.logout} onClick={() => console.log('click')}>
-          EN
+        <button className={styles.logout} onClick={toggleLanguage}>
+          {language}
         </button>
         {isAnonymous ? (
           <div className={styles.links}>

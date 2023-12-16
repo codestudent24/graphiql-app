@@ -7,6 +7,8 @@ interface DevCardProps {
 }
 
 export function DevCard({ nick, name }: DevCardProps) {
+  const isEn = /[a-zA-Z]/.test(name);
+
   return (
     <div
       style={{
@@ -21,7 +23,9 @@ export function DevCard({ nick, name }: DevCardProps) {
         <Link to={`https://github.com/${nick}`} className={styles.nick}>
           {nick}
         </Link>
-        <div className={styles.name}>{name}</div>
+        <div className={styles.name} style={isEn ? { fontSize: 13 } : { fontSize: 11 }}>
+          {name}
+        </div>
       </div>
     </div>
   );

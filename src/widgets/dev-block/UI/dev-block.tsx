@@ -1,17 +1,25 @@
 import styles from './dev-block.module.scss';
 import { DevCard } from '../../dev-card/UI/dev-card';
 
-export function DevBlock() {
+interface DevBlockProps {
+  language?: string;
+}
+
+export function DevBlock({ language }: DevBlockProps) {
+  const isEn = language === 'EN';
+
+  const title = isEn ? 'ABOUT US' : 'О НАС';
+
   const developers = [
-    { nick: 'asmat1k', name: 'Tim Dobrov' },
-    { nick: 'codestudent24', name: 'Denis Goncharenko' },
-    { nick: 'Irina0313', name: 'Iryna Kanavalchuk' },
-    { nick: 'rolling-scopes-school', name: 'React Course' },
+    { nick: 'asmat1k', name: isEn ? 'Tim Dobrov' : 'Тима Добров' },
+    { nick: 'codestudent24', name: isEn ? 'Denis Goncharenko' : 'Денис Гончаренко' },
+    { nick: 'Irina0313', name: isEn ? 'Iryna Kanavalchuk' : 'Ирина Кавальчук' },
+    { nick: 'rolling-scopes-school', name: isEn ? 'React Course' : 'React курс' },
   ];
 
   return (
     <div className={styles.developers}>
-      <h2 className={styles.title}>ABOUT US</h2>
+      <h2 className={styles.title}>{title}</h2>
       <div className={styles.list}>
         {developers.map((item, index) => {
           return <DevCard key={index} nick={item.nick} name={item.name} />;
