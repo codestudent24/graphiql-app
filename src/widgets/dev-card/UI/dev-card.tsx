@@ -12,7 +12,7 @@ export function DevCard({ nick, name }: DevCardProps) {
   return (
     <div
       style={{
-        background: `url('../../../../public/${nick}.jpg')`,
+        background: `url('/${nick}.jpg')`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
