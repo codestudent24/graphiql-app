@@ -7,7 +7,7 @@ export default function MainPage() {
   const { isAnonymous } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (isAnonymous) navigate('/auth');
+    if (isAnonymous) navigate('/');
   }, [navigate, isAnonymous]);
 
   return (
