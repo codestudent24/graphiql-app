@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/appHooks';
 import InputURL from '../../features/graphiql/URL';
-import Editor from '../../features/graphiql/URL/Editor';
+import EditorContainer from '../../features/graphiql/EditorContainer';
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function MainPage() {
   return (
     <div className="main">
       <InputURL />
-      <Editor />
+      <EditorContainer />
     </div>
   );
 }
