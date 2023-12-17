@@ -7,7 +7,7 @@ interface CourseBlockProps {
 const contentRU = `Данный курс ориентирован на разработку веб-приложений с использованием библиотеки React для создания современных пользовательских интерфейсов.
 В нем нами были изучены такие технологии как: React-Router, ReduxTK, NextJs, Jest, GraphiQl`;
 const contentEN = `This course focuses on the development of web applications using a library React to create modern user interfaces.
-In it, we used technologies such as: React-Router, ReduxTK, Next js, Just, GraphiQL`;
+Along the course we've studied, we used technologies such as: React-Router, ReduxTK, Next js, Just, GraphiQL`;
 
 export function CourseBlock({ language }: CourseBlockProps) {
   const isEn = language === 'EN';
