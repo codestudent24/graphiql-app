@@ -4,7 +4,7 @@ import { useLogout } from '../model/logout';
 import styles from './header.module.scss';
 import { useState } from 'react';
 import { LoginOutlined, LogoutOutlined, HomeOutlined, UserAddOutlined } from '@ant-design/icons';
-import { useLanguage } from '../../language/language-context';
+import { useLanguage } from '../../language/use-language';
 
 export function Header() {
   const logout = useLogout();

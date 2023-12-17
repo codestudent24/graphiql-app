@@ -1,4 +1,4 @@
-import { useLanguage } from '../../features/language/language-context';
+import { useLanguage } from '../../features/language/use-language';
 import { CourseBlock } from '../../widgets/course-block';
 import { DevBlock } from '../../widgets/dev-block/UI/dev-block';
 import { ProjectBlock } from '../../widgets/project-block';
