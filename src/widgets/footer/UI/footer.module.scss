@@ -12,14 +12,24 @@
   a {
     color: white;
     text-decoration: none;
-
-    transition: 0.3s;
+  }
+  .gitHub {
+    transform: scale(1.5);
+    width: 30px;
+    transition: 0.5s;
     &:hover {
-      cursor: pointer;
-      transform: scale(1.1);
+      transform: scale(1.5) rotate(10deg);
     }
-    &:active {
-      transform: scale(0.95);
+  }
+  img {
+    background-color: white;
+    border-radius: 5px;
+    width: 50px;
+    padding: 5px;
+
+    transition: 0.5s;
+    &:hover {
+      transform: rotate(5deg);
     }
   }
 }

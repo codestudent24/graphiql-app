@@ -10,7 +10,7 @@ export function Footer() {
       </Link>
       <div className={styles.year}>2023</div>
       <Link to="https://rs.school/react/" className={styles.rss}>
-        RSS
+        <img className={styles.img} src="/rs_school_js.svg" alt="rss" />
       </Link>
     </footer>
   );
