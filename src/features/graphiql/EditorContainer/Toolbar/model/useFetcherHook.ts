@@ -15,6 +15,6 @@ export function useFetcher() {
       }),
     });
     const data = await request.json();
-    dispatch(setResponseData(JSON.stringify(data)));
+    dispatch(setResponseData(JSON.stringify(data, null, 2)));
   };
 }

@@ -4,6 +4,7 @@ interface authState {
   url: string;
   requestData: string;
   responseData: string;
+  variables: object;
 }
 
 const initialRequestData = `{
@@ -18,6 +19,7 @@ const initialState: authState = {
   url: 'https://rickandmortyapi.com/graphql',
   requestData: initialRequestData,
   responseData: '',
+  variables: {},
 };
 
 export const rootSlice = createSlice({
@@ -42,10 +44,24 @@ export const rootSlice = createSlice({
     removeResponseData: (state) => {
       state.responseData = '';
     },
+    setVariables: (state, action: PayloadAction<object>) => {
+      state.variables = action.payload;
+    },
+    removeVariables: (state) => {
+      state.variables = {};
+    },
   },
 });
 
-export const { setURL, removeURL, setRequestData, removeRequestData, setResponseData, removeResponseData } =
-  rootSlice.actions;
+export const {
+  setURL,
+  removeURL,
+  setRequestData,
+  removeRequestData,
+  setResponseData,
+  removeResponseData,
+  setVariables,
+  removeVariables,
+} = rootSlice.actions;
 
 export default rootSlice.reducer;
