@@ -1,17 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { VariableInfoType } from '../shared/types';
 
 interface authState {
   url: string;
   requestData: string;
   responseData: string;
-  variables: object;
+  variables: VariableInfoType[];
 }
 
-const initialRequestData = `{
-  characters {
-    results {
-      name
-    }
+interface ISetVariableValue {
+  index: number;
+  value: string | number | boolean;
+}
+
+const initialRequestData = `query ($id: String) {
+  character(id: $id) {
+    id
+    name,
+    status
   }
 }`;
 
@@ -19,7 +25,7 @@ const initialState: authState = {
   url: 'https://rickandmortyapi.com/graphql',
   requestData: initialRequestData,
   responseData: '',
-  variables: {},
+  variables: [],
 };
 
 export const rootSlice = createSlice({
@@ -44,11 +50,17 @@ export const rootSlice = createSlice({
     removeResponseData: (state) => {
       state.responseData = '';
     },
-    setVariables: (state, action: PayloadAction<object>) => {
+    setVariables: (state, action: PayloadAction<VariableInfoType[]>) => {
+      console.log('set variables:');
+      console.log(action.payload);
       state.variables = action.payload;
     },
+    setVariableValue: (state, action: PayloadAction<ISetVariableValue>) => {
+      const { index, value } = action.payload;
+      state.variables[index].value = value;
+    },
     removeVariables: (state) => {
-      state.variables = {};
+      state.variables = [];
     },
   },
 });
@@ -61,6 +73,7 @@ export const {
   setResponseData,
   removeResponseData,
   setVariables,
+  setVariableValue,
   removeVariables,
 } = rootSlice.actions;
 
