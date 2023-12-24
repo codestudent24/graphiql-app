@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../../../app/appHooks';
+import replaceVariables from './model/replaceVariables';
 import { useFetcher } from './model/useFetcherHook';
 import styles from './UI/toolbar.module.scss';
 
@@ -8,13 +9,14 @@ type ToolbarProps = {
 };
 
 export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
-  const { url, requestData } = useAppSelector((state) => state.root);
+  const { url, requestData, variables } = useAppSelector((state) => state.root);
   const fetcher = useFetcher();
   return (
     <div className={styles.toolbar}>
       <button
         onClick={() => {
-          fetcher(requestData, url);
+          const request = replaceVariables(requestData, variables);
+          if (request) fetcher(request, url);
         }}
       >
         Send

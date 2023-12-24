@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { useAppDispatch, useAppSelector } from '../../../../app/appHooks';
-import { setRequestData, setVariables } from '../../../../app/rootSlice';
-import { makeVariablesSet } from './model/replaceVariables';
+import { setRequestData } from '../../../../app/rootSlice';
+import ErrorList from '../../../ErrorList';
 
 /* To check variables
 query ($name: String | Number, $id: Number, $isBoolean: Boolean) {
@@ -13,7 +13,12 @@ query ($name: String | Number, $id: Number, $isBoolean: Boolean) {
   }
 }
 */
-export default function Editor() {
+
+type Props = {
+  errors: string[];
+};
+
+export default function Editor({ errors }: Props) {
   const { requestData } = useAppSelector((state) => state.root);
   const dispatch = useAppDispatch();
 
@@ -27,16 +32,7 @@ export default function Editor() {
   return (
     <>
       <CodeMirror value={requestData} onChange={onChange} />
-      <br />
-      <button
-        onClick={() => {
-          // console.log(replaceVariables(requestData, variables as VariablesType));
-          const varSet = makeVariablesSet(requestData);
-          dispatch(setVariables(varSet));
-        }}
-      >
-        check variables
-      </button>
+      <ErrorList errors={errors} />
     </>
   );
 }

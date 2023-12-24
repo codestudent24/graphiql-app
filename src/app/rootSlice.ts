@@ -10,7 +10,7 @@ interface authState {
 
 interface ISetVariableValue {
   index: number;
-  value: string | number | boolean;
+  value: string | number | boolean | null;
 }
 
 const initialRequestData = `query ($id: String) {
