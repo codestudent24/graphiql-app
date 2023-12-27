@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../../../app/appHooks';
+import PrettifyButton from '../PrettifyButton';
 import replaceVariables from './model/replaceVariables';
 import { useFetcher } from './model/useFetcherHook';
 import styles from './UI/toolbar.module.scss';
@@ -21,6 +22,7 @@ export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
       >
         Send
       </button>
+      <PrettifyButton />
       <button
         onClick={() => {
           setIsEditable(!isEditable);
