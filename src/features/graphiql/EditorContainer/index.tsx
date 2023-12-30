@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Editor from './Editor';
-import styles from './editorContainer.module.scss';
 import Toolbar from './Toolbar';
 import Results from './Results';
 import Variables from './Variables';
@@ -8,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import { makeVariables } from './Editor/model/handleVariables';
 import { setVariableValue, setVariables } from '../../../app/rootSlice';
 import { checkVariables } from './Variables/model/isCorrectVariables';
+import styles from './editorContainer.module.scss';
 
 const initialVars = `{
   "id": "1"
@@ -56,7 +56,7 @@ export default function EditorContainer() {
         {isEditable ? <Editor errors={requestErrors} /> : <Results />}
       </div>
       <div className={styles.variablesContainer}>
-        <h2>Variables</h2>
+        <h2 className={styles.header}>Variables</h2>
         <Variables varsInput={varsInput} setVarsInput={setVarsInput} errors={varsErrors} />
       </div>
     </>

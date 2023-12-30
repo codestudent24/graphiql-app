@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
 import { useAppDispatch, useAppSelector } from '../../../../app/appHooks';
 import { setRequestData } from '../../../../app/rootSlice';
 import ErrorList from '../../../ErrorList';
+import { myTheme } from '../../../../shared/codemirrorTheme';
 
 /* To check variables
 query ($name: String | Number, $id: Number, $isBoolean: Boolean) {
@@ -31,7 +33,12 @@ export default function Editor({ errors }: Props) {
 
   return (
     <>
-      <CodeMirror value={requestData} onChange={onChange} />
+      <CodeMirror
+        value={requestData}
+        onChange={onChange}
+        theme={myTheme}
+        extensions={[javascript({ typescript: true })]}
+      />
       <ErrorList errors={errors} />
     </>
   );
