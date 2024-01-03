@@ -51,8 +51,6 @@ export const rootSlice = createSlice({
       state.responseData = '';
     },
     setVariables: (state, action: PayloadAction<VariableInfoType[]>) => {
-      console.log('set variables:');
-      console.log(action.payload);
       state.variables = action.payload;
     },
     setVariableValue: (state, action: PayloadAction<ISetVariableValue>) => {

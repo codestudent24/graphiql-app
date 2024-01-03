@@ -44,7 +44,6 @@ export function checkVariables(parsedInput: object, variables: VariableInfoType[
       });
     }
   }
-  console.log('errors', errors);
   return {
     errors,
     variablesSet,
