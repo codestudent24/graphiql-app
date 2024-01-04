@@ -7,16 +7,6 @@ import { makeVariables } from './model/handleVariables';
 import { myTheme } from '../../../../shared/codemirrorTheme';
 import ErrorList from '../../../ErrorList';
 
-/* To check variables
-query ($name: String | Number, $id: Number, $isBoolean: Boolean) {
-  characters {
-    results {
-      name
-    }
-  }
-}
-*/
-
 export default function Editor() {
   const [errors, setErrors] = useState<string[]>([]);
   const { requestData } = useAppSelector((state) => state.root);

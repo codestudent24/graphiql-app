@@ -1,5 +1,5 @@
 .button {
-  margin-right: 8px;
+  margin-right: 12px;
   padding: 4px 8px;
   background: #0e101c;
   border-image: linear-gradient(#2cd9ff, #7effb2cf 81%, #ffffff00 0, #f4ff7ad1 82%, #ffd80e);
@@ -8,7 +8,9 @@
   border-image-slice: 1;
   color: #fff;
   cursor: pointer;
+  transition: transform 0.3s;
   &:hover {
+    transform: scale(1.05);
     color: #2cd9ff;
   }
 }

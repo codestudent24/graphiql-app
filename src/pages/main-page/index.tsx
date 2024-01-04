@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { useAppSelector } from '../../app/appHooks';
 import InputURL from '../../features/graphiql/URL';
 import EditorContainer from '../../features/graphiql/EditorContainer';
+import styles from './main-page.module.scss';
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function MainPage() {
   }, [navigate, isAnonymous, auth.currentUser]);
 
   return (
-    <div className="main">
+    <div className={styles.main}>
       <InputURL />
       <EditorContainer />
     </div>
