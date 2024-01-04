@@ -5,9 +5,6 @@ export function useFetcher() {
   const dispatch = useAppDispatch();
 
   return async function fetcher(value: string, headers: string, url: string) {
-    console.log(`input value:\n${value}`);
-    console.log(`headers value:\n${headers}`);
-
     const requestHeaders = new Headers();
     requestHeaders.append('Content-type', 'application/json');
     if (headers) {
@@ -16,7 +13,7 @@ export function useFetcher() {
         requestHeaders.append(key, value);
       }
     }
-
+    
     const request = await fetch(url, {
       method: 'POST',
       headers: requestHeaders,

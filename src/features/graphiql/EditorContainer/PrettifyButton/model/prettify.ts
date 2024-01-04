@@ -1,19 +1,19 @@
-function handleTabs(input: string, isFirst: boolean) {
-  const openBracketIndex = input.indexOf('{') + 1;
-  const closeBracketIndex = input.lastIndexOf('}') - 1;
-  const beforeBrackets = input.slice(0, openBracketIndex);
-  let betweenBrackets: string;
-  if (isFirst) {
-    betweenBrackets = input.slice(openBracketIndex, closeBracketIndex).replace(/\n\s*/g, '\n  ');
-  } else {
-    betweenBrackets = input.slice(openBracketIndex, closeBracketIndex).replace(/\n/g, '\n  ');
-  }
+function handleTabs(input: string, tabCount: number = 1) {
+  const tab = '  ';
+  const trimmed = input.replace(/\s*\n/g, '\n');
+  const openBracketIndex = trimmed.indexOf('{') + 1;
+  const closeBracketIndex = trimmed.lastIndexOf('}') - 1;
+  const beforeBrackets = trimmed.slice(0, openBracketIndex);
+  let betweenBrackets = trimmed
+    .slice(openBracketIndex, closeBracketIndex)
+    .replace(/\n\s*/g, `\n${tab.repeat(tabCount)}`)
+    .replace(/(\s?\n\s*)$/, '\n ');
   const betweenOpenBracketIndex = betweenBrackets.indexOf('{');
   const betweenCloseBracketIndex = betweenBrackets.lastIndexOf('}');
   if (betweenOpenBracketIndex !== -1 && betweenCloseBracketIndex !== -1) {
-    betweenBrackets = handleTabs(betweenBrackets, false);
+    betweenBrackets = handleTabs(betweenBrackets, tabCount + 1);
   }
-  const afterBrackets = input.slice(closeBracketIndex);
+  const afterBrackets = trimmed.slice(closeBracketIndex);
   return beforeBrackets + betweenBrackets + afterBrackets;
 }
 
@@ -24,7 +24,7 @@ export function prettify(input: string) {
     .replace(/ +:/g, ':')
     .replace(/ {2,}/g, ' ')
     .replace(/ +,/g, ',')
-    .replace(/\n*/g, '')
+    .replace(/\n/g, '')
     .split(' ');
   for (let i = 0; i < result.length; i += 1) {
     const subArray = result[i].split('');
@@ -48,5 +48,5 @@ export function prettify(input: string) {
     .replace(/(\n{2,}|\n\s*\n)/g, '\n')
     .replaceAll(/ {2,}/g, ' ')
     .trim();
-  return handleTabs(withLines, true);
+  return handleTabs(withLines);
 }

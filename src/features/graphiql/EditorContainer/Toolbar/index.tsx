@@ -24,7 +24,7 @@ export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
       >
         Go
       </button>
-      <PrettifyButton />
+      {isEditable && <PrettifyButton />}
       <button
         className={commonStyles.button}
         onClick={() => {
