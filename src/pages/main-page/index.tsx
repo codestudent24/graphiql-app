@@ -1,14 +1,26 @@
 import { useNavigate } from 'react-router-dom';
+import { getAuth } from 'firebase/auth';
 import { useAppSelector } from '../../app/appHooks';
 import { useEffect } from 'react';
 
 export default function MainPage() {
   const navigate = useNavigate();
+  const auth = getAuth();
   const { isAnonymous } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (isAnonymous) navigate('/auth');
-  }, [navigate, isAnonymous]);
+    async function isExpired() {
+      const user = auth.currentUser;
+      if (user) {
+        const currentDate = new Date().valueOf();
+        const expirationTime = (await user.getIdTokenResult()).expirationTime;
+        const expirationDate = new Date(expirationTime).valueOf();
+        if (currentDate > expirationDate) navigate('/');
+      }
+    }
+    isExpired();
+  }, [navigate, isAnonymous, auth.currentUser]);
 
   return (
     <div className="main">
