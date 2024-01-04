@@ -6,6 +6,7 @@ interface authState {
   requestData: string;
   responseData: string;
   variables: VariableInfoType[];
+  headers: string;
 }
 
 interface ISetVariableValue {
@@ -26,6 +27,7 @@ const initialState: authState = {
   requestData: initialRequestData,
   responseData: '',
   variables: [],
+  headers: '',
 };
 
 export const rootSlice = createSlice({
@@ -60,6 +62,12 @@ export const rootSlice = createSlice({
     removeVariables: (state) => {
       state.variables = [];
     },
+    setHeaders: (state, action: PayloadAction<string>) => {
+      state.headers = action.payload;
+    },
+    removeHeaders: (state) => {
+      state.headers = '';
+    },
   },
 });
 
@@ -73,6 +81,8 @@ export const {
   setVariables,
   setVariableValue,
   removeVariables,
+  setHeaders,
+  removeHeaders,
 } = rootSlice.actions;
 
 export default rootSlice.reducer;
