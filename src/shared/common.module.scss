@@ -1,0 +1,14 @@
+.button {
+  margin-right: 8px;
+  padding: 4px 8px;
+  background: #0e101c;
+  border-image: linear-gradient(#2cd9ff, #7effb2cf 81%, #ffffff00 0, #f4ff7ad1 82%, #ffd80e);
+  border-width: 1px;
+  border-style: solid;
+  border-image-slice: 1;
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    color: #2cd9ff;
+  }
+}
