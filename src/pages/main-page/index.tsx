@@ -10,7 +10,6 @@ export default function MainPage() {
 
   useEffect(() => {
     if (isAnonymous) navigate('/auth');
-
     async function isExpired() {
       const user = auth.currentUser;
       if (user) {
