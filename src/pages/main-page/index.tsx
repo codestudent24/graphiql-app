@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useAppSelector } from '../../app/appHooks';
-import { useEffect } from 'react';
+import InputURL from '../../features/graphiql/URL';
+import EditorContainer from '../../features/graphiql/EditorContainer';
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -24,7 +26,8 @@ export default function MainPage() {
 
   return (
     <div className="main">
-      <h2>MAIN-PAGE</h2>
+      <InputURL />
+      <EditorContainer />
     </div>
   );
 }
