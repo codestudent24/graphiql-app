@@ -8,14 +8,18 @@ import { useAppDispatch, useAppSelector } from '../../../../app/appHooks';
 import { myTheme } from '../../../../shared/codemirrorTheme';
 import ErrorList from '../../../ErrorList';
 
+import styles from './UI/variables.module.scss';
+
 const initialVars = `{
   "id": "1"
 }`;
 
 export default memo(function Variables() {
+  const { variables } = useAppSelector((state) => state.root);
+
   const [varsInput, setVarsInput] = useState(initialVars);
   const [varsErrors, setVarsErrors] = useState<string[]>([]);
-  const { variables } = useAppSelector((state) => state.root);
+
   const dispatch = useAppDispatch();
 
   const LinterExtension = linter(jsonParseLinter());
@@ -47,7 +51,13 @@ export default memo(function Variables() {
 
   return (
     <>
-      <CodeMirror value={varsInput} onChange={onChange} theme={myTheme} extensions={[json(), LinterExtension]} />
+      <CodeMirror
+        className={styles.editor}
+        value={varsInput}
+        onChange={onChange}
+        theme={myTheme}
+        extensions={[json(), LinterExtension]}
+      />
       {varsErrors.length > 0 && <ErrorList errors={varsErrors} />}
     </>
   );

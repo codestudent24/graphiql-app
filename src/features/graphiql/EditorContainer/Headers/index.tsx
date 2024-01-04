@@ -4,15 +4,19 @@ import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { myTheme } from '../../../../shared/codemirrorTheme';
 import ErrorList from '../../../ErrorList';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../../app/appHooks';
+import { useAppDispatch, useAppSelector } from '../../../../app/appHooks';
 import { setHeaders } from '../../../../app/rootSlice';
+
+import styles from './UI/headers.module.scss';
 
 const initialHeaders = `{
   "Content-Text": "TEST"
 }`;
 
 export default function Headers() {
-  const [headersInput, setHeadersInput] = useState(initialHeaders);
+  const { headers } = useAppSelector((state) => state.root);
+
+  const [headersInput, setHeadersInput] = useState(headers ? headers : initialHeaders);
   const [headersErrors, setHeadersErrors] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
@@ -35,6 +39,7 @@ export default function Headers() {
   return (
     <>
       <CodeMirror
+        className={styles.editor}
         value={headersInput}
         onChange={setHeadersInput}
         theme={myTheme}

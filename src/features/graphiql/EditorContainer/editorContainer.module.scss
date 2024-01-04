@@ -10,8 +10,35 @@
 .variablesContainer {
   padding: 20px;
   background-color: #1c1c1c;
-  border-bottom: 4px solid #3fa4ff88;
   text-align: left;
+  .btns {
+    display: flex;
+    gap: 10px;
+
+    margin: 10px 0;
+    .btn {
+      cursor: pointer;
+
+      background-color: transparent;
+      color: white;
+      text-transform: uppercase;
+
+      border: 0;
+      border-radius: 10px;
+      padding: 5px 10px;
+
+      transition: 0.4s;
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.39);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .btnActive {
+      color: red;
+    }
+  }
 }
 
 .header {
