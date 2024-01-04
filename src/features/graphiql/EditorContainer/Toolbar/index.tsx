@@ -11,7 +11,7 @@ type ToolbarProps = {
 };
 
 export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
-  const { url, requestData, variables } = useAppSelector((state) => state.root);
+  const { url, requestData, variables, headers } = useAppSelector((state) => state.root);
   const fetcher = useFetcher();
   return (
     <div className={styles.toolbar}>
@@ -19,7 +19,7 @@ export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
         className={commonStyles.button}
         onClick={() => {
           const request = replaceVariables(requestData, variables);
-          if (request) fetcher(request, url);
+          if (request) fetcher(request, headers, url);
         }}
       >
         Go

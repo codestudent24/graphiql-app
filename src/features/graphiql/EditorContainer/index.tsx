@@ -5,19 +5,29 @@ import Results from './Results';
 import Variables from './Variables';
 import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import { makeVariables } from './Editor/model/handleVariables';
-import { setVariableValue, setVariables } from '../../../app/rootSlice';
+import { setHeaders, setVariableValue, setVariables } from '../../../app/rootSlice';
 import { checkVariables } from './Variables/model/isCorrectVariables';
 import styles from './editorContainer.module.scss';
+import Headers from './Headers';
 
 const initialVars = `{
   "id": "1"
 }`;
 
+const initialHeaders = `{
+  "Content-Text": "TEST"
+}`;
+
 export default function EditorContainer() {
   const [isEditable, setIsEditable] = useState(true);
+
   const [requestErrors, setRequestErrors] = useState<string[]>([]);
+
   const [varsInput, setVarsInput] = useState(initialVars);
   const [varsErrors, setVarsErrors] = useState<string[]>([]);
+
+  const [headersInput, setHeadersInput] = useState(initialHeaders);
+  const [headersErrors, setHeadersErrors] = useState<string[]>([]);
 
   const { requestData, variables } = useAppSelector((state) => state.root);
   const dispatch = useAppDispatch();
@@ -25,8 +35,11 @@ export default function EditorContainer() {
   useEffect(() => {
     const { errors, variablesSet } = makeVariables(requestData);
     setRequestErrors(errors);
-    if (errors.length === 0) dispatch(setVariables(variablesSet));
-  }, [requestData, setRequestErrors, dispatch]);
+    if (errors.length === 0) {
+      dispatch(setVariables(variablesSet));
+      dispatch(setHeaders(headersInput));
+    }
+  }, [requestData, headersInput, setRequestErrors, dispatch]);
 
   useEffect(() => {
     if (varsInput.length) {
@@ -49,6 +62,19 @@ export default function EditorContainer() {
     }
   }, [dispatch, setVarsErrors, varsInput, variables]);
 
+  useEffect(() => {
+    if (headersInput.length) {
+      try {
+        JSON.parse(headersInput);
+        setHeadersErrors([]);
+      } catch (error) {
+        setHeadersErrors(['Not valid JSON']);
+      }
+    } else {
+      setHeadersErrors([]);
+    }
+  }, [setHeadersErrors, headersInput]);
+
   return (
     <>
       <div className={styles.editorContainer}>
@@ -58,6 +84,10 @@ export default function EditorContainer() {
       <div className={styles.variablesContainer}>
         <h2 className={styles.header}>Variables</h2>
         <Variables varsInput={varsInput} setVarsInput={setVarsInput} errors={varsErrors} />
+      </div>
+      <div className={styles.variablesContainer}>
+        <h2 className={styles.header}>Headers</h2>
+        <Headers headersInput={headersInput} setHeadersInput={setHeadersInput} errors={headersErrors} />
       </div>
     </>
   );
