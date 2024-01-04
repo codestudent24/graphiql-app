@@ -1,28 +1,101 @@
 .header {
-  text-align: right;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  a {
-    margin-right: 1rem;
-    color: #666666;
-    text-decoration: none;
-    &:hover {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+
+  color: black;
+  background-color: transparent;
+  border-radius: 0 0 10px 10px;
+  font-size: 21px;
+
+  padding: 10px 15px;
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    .links {
+      display: flex;
+      gap: 20px;
+    }
+    a {
+      color: black;
+      text-decoration: none;
+
+      transition: 0.2s;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .logout {
+      font-family: 'Afacad', 'Roboto', sans-serif;
+      font-size: 21px;
+
       cursor: pointer;
-      color: #000000;
+      border: 0;
+      padding: 0;
+
+      background-color: transparent;
+      color: black;
     }
   }
-  button {
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    color: #666666;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    &:hover {
+}
+
+.scrolled {
+  transition: 0.3s ease-in-out;
+  position: sticky;
+  top: 0%;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: black;
+  border-radius: 0 0 10px 10px;
+  font-size: 21px;
+
+  padding: 10px 15px;
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    .links {
+      display: flex;
+      gap: 20px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+
+      transition: 0.2s;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .logout {
+      font-family: 'Afacad', 'Roboto', sans-serif;
+      font-size: 21px;
+
       cursor: pointer;
-      color: #000000;
+      border: 0;
+      padding: 0;
+
+      background-color: transparent;
+      color: white;
     }
   }
 }
