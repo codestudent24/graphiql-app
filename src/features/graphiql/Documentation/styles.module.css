@@ -1,0 +1,40 @@
+.typesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.typeArgs {
+  display: flex;
+}
+
+.link,
+.linkBack,
+.fieldLink {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.link {
+  color: rgb(235, 156, 0);
+}
+.fieldLink {
+  color: rgb(95, 137, 216);
+}
+
+.link:hover,
+.linkBack:hover,
+.fieldLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.string {
+  display: flex;
+  align-items: center;
+}
+
+.redText {
+  color: rgb(255, 107, 139);
+}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/appHooks';
 import InputURL from '../../features/graphiql/URL';
 import EditorContainer from '../../features/graphiql/EditorContainer';
+import DocumentationContainer from '../../features/graphiql/Documentation';
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function MainPage() {
 
   return (
     <div className="main">
+      <DocumentationContainer />
       <InputURL />
       <EditorContainer />
     </div>
