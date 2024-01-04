@@ -13,7 +13,7 @@ export function useFetcher() {
         requestHeaders.append(key, value);
       }
     }
-    
+
     const request = await fetch(url, {
       method: 'POST',
       headers: requestHeaders,
