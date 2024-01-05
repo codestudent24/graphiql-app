@@ -6,8 +6,6 @@ import InputURL from '../../features/graphiql/URL';
 import EditorContainer from '../../features/graphiql/EditorContainer';
 import styles from './main-page.module.scss';
 import commonStyles from '../../shared/common.module.scss';
-//import { schemaFetcher } from '../../features/graphiql/Documentation/model/getShema';
-//import { IntrospectionSchema } from 'graphql';
 
 const DocumentationContainer = lazy(() => import('../../features/graphiql/Documentation'));
 

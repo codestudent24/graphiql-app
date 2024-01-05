@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-//import { schemaFetcher } from './model/getShema';
-//import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import getTypes from './model/getTypes';
 import styles from './styles.module.scss';
 
