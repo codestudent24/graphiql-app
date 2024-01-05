@@ -1,15 +1,21 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useAppSelector } from '../../app/appHooks';
 import InputURL from '../../features/graphiql/URL';
 import EditorContainer from '../../features/graphiql/EditorContainer';
-import DocumentationContainer from '../../features/graphiql/Documentation';
+import styles from './main-page.module.scss';
+import commonStyles from '../../shared/common.module.scss';
+//import { schemaFetcher } from '../../features/graphiql/Documentation/model/getShema';
+//import { IntrospectionSchema } from 'graphql';
+
+const DocumentationContainer = lazy(() => import('../../features/graphiql/Documentation'));
 
 export default function MainPage() {
   const navigate = useNavigate();
   const auth = getAuth();
   const { isAnonymous } = useAppSelector((state) => state.auth);
+  const [isDocsVisible, setIsDocsVisible] = useState(false);
 
   useEffect(() => {
     if (isAnonymous) navigate('/auth');
@@ -25,11 +31,23 @@ export default function MainPage() {
     isExpired();
   }, [navigate, isAnonymous, auth.currentUser]);
 
+  const handleDocsIconClick = (prop?: boolean) => {
+    setIsDocsVisible((curr: boolean) => {
+      return prop !== undefined ? prop : !curr;
+    });
+  };
+
   return (
-    <div className="main">
-      <DocumentationContainer />
-      <InputURL />
-      <EditorContainer />
+    <div className={`${styles.mainWrapper} ${commonStyles.wrapper} `}>
+      <InputURL handleDocsIconClick={handleDocsIconClick} />
+      <div className={styles.editor}>
+        {isDocsVisible && (
+          <Suspense fallback={<div style={{ color: 'white' }}>Loading Documentation...</div>}>
+            <DocumentationContainer />
+          </Suspense>
+        )}
+        <EditorContainer />
+      </div>
     </div>
   );
 }

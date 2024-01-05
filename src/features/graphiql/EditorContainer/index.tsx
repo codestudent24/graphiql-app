@@ -12,24 +12,22 @@ export default function EditorContainer() {
   const [isVarsEditMode, setIsVarsEditMode] = useState(true);
 
   return (
-    <>
+    <div className={styles.editorWrapper}>
       <div className={styles.editorContainer}>
         <Toolbar isEditable={isEditable} setIsEditable={setIsEditable} />
         {isEditable ? <Editor /> : <Results />}
       </div>
-      <div className={styles.editors}>
-        <div className={styles.variablesContainer}>
-          <div className={styles.btns}>
-            <button className={styles.btn} onClick={() => setIsVarsEditMode(true)}>
-              Variables
-            </button>
-            <button className={styles.btn} onClick={() => setIsVarsEditMode(false)}>
-              Headers
-            </button>
-          </div>
-          {isVarsEditMode ? <Variables /> : <Headers />}
+      <div className={styles.variablesContainer}>
+        <div className={styles.btns}>
+          <button className={styles.btn} onClick={() => setIsVarsEditMode(true)}>
+            Variables
+          </button>
+          <button className={styles.btn} onClick={() => setIsVarsEditMode(false)}>
+            Headers
+          </button>
         </div>
+        {isVarsEditMode ? <Variables /> : <Headers />}
       </div>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
-import { schemaFetcher } from './model/getShema';
-import { useAppDispatch } from '../../../app/appHooks';
+import { useEffect, useState } from 'react';
+//import { schemaFetcher } from './model/getShema';
+//import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import getTypes from './model/getTypes';
+import styles from './styles.module.scss';
+
 import {
   IntrospectionField,
   IntrospectionInputValue,
@@ -12,6 +14,7 @@ import {
   IntrospectionSchema,
   IntrospectionType,
 } from 'graphql';
+import { useAppSelector } from '../../../app/appHooks';
 
 export type docsFieldsType =
   | IntrospectionSchema
@@ -28,28 +31,17 @@ export type docsFieldsType =
   | null;
 
 const DocumentationContainer = () => {
-  const dispatch = useAppDispatch();
-  const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
+  const schema = useAppSelector((state) => state.root.schema);
+  const [prevLevels, setPrevLevels] = useState<docsFieldsType[]>([null]);
+  const [currDocLevel, setCurrDocLevel] = useState<docsFieldsType | null>(schema);
 
-  const [prevLevels, setPrevLevels] = useState<docsFieldsType[]>([schema]);
-
-  const [currDocLevel, setCurrDocLevel] = useState<docsFieldsType | null>(null);
-  const url = 'https://rickandmortyapi.com/graphql';
-  //const url = 'https://graphqlzero.almansi.me/api';
-  //const url = 'https://countries.trevorblades.com/graphql';
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await schemaFetcher(url);
-        setSchema(result);
-        setCurrDocLevel(result);
-      } catch (error) {
-        console.error('Error fetching schema:', error);
-      }
-    };
-
-    fetchData();
-  }, [url, dispatch]);
+    setPrevLevels((prevLevels) => {
+      prevLevels.push(schema);
+      return [...prevLevels];
+    });
+    setCurrDocLevel(schema);
+  }, [schema]);
 
   const handleClick = (level: docsFieldsType, prevLevelsAction: string = 'delete', prevLevel?: docsFieldsType) => {
     if (prevLevelsAction === 'add' && prevLevel) {
@@ -67,11 +59,11 @@ const DocumentationContainer = () => {
     }
   };
 
-  if (!schema) {
-    return <div>Loading...</div>;
-  }
-
-  return <div>{currDocLevel && getTypes(schema, prevLevels[prevLevels.length - 1], currDocLevel, handleClick)}</div>;
+  return (
+    <div className={styles.docsContainer}>
+      {currDocLevel && getTypes(schema, prevLevels[prevLevels.length - 1], currDocLevel, handleClick)}
+    </div>
+  );
 };
 
 export default DocumentationContainer;

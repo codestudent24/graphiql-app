@@ -1,8 +1,6 @@
-.body {
-  position: relative;
-}
+.main {
+  display: flex;
+  justify-content: center;
 
-.wrapper {
-  padding: 0 10px;
-  margin: 5px 0;
+  flex: 1 0 auto;
 }

@@ -1,15 +1,18 @@
 import { IntrospectionSchema } from 'graphql';
 import { docsFieldsType } from '..';
-import styles from '../styles.module.css';
-import { ReactNode } from 'react';
+import getArgs from './getArgs';
+import styles from '../styles.module.scss';
+import { startTransition } from 'react';
 
-const handleButtonClick = (
+export const handleButtonClick = (
   onButtonClick: (level: docsFieldsType, prevLevelsAction: string, prevLevel?: docsFieldsType) => void,
   currLevel: docsFieldsType,
   prevLevelsAction: string,
   prevLevel?: docsFieldsType,
 ) => {
-  onButtonClick(currLevel, prevLevelsAction, prevLevel);
+  startTransition(() => {
+    onButtonClick(currLevel, prevLevelsAction, prevLevel);
+  });
 };
 
 const getTypes = (
@@ -25,35 +28,36 @@ const getTypes = (
           <h2>Docs</h2>
           <p>A GraphQL schema provides a root type for each kind of operation.</p>
           <p>Root Types</p>
-          <span>query: </span>
-          <button
-            className={styles.link}
-            onClick={() =>
-              handleButtonClick(
-                onButtonClick,
-                level.types.filter((t) => t.name === level.queryType.name)[0],
-                'add',
-                schema,
-              )
-            }
-          >
-            {level.queryType.name}
-          </button>
+          <div>
+            <span>query:&nbsp;</span>
+            <button
+              className={styles.link}
+              onClick={() =>
+                handleButtonClick(
+                  onButtonClick,
+                  level.types.filter((t) => t.name === level.queryType.name)[0],
+                  'add',
+                  schema,
+                )
+              }
+            >
+              {level.queryType.name}
+            </button>
+          </div>
+
           <p>All Schema Types</p>
           <div className={styles.typesContainer}>
             {level.types.map(
               (type) =>
                 !type.name.startsWith('__') &&
                 type.name !== 'Query' && (
-                  <>
-                    <button
-                      className={styles.link}
-                      key={type.name}
-                      onClick={() => handleButtonClick(onButtonClick, type, 'add', level)}
-                    >
-                      {type.name}
-                    </button>
-                  </>
+                  <button
+                    className={styles.link}
+                    key={type.name}
+                    onClick={() => handleButtonClick(onButtonClick, type, 'add', level)}
+                  >
+                    {type.name}
+                  </button>
                 ),
             )}
           </div>
@@ -69,7 +73,7 @@ const getTypes = (
           <div className={styles.typesContainer}>
             {'fields' in level &&
               level.fields.map((type) => (
-                <div key={type.name}>
+                <div key={type.name} className={styles.typeFieldContainer}>
                   <div className={type.args.length === 1 ? styles.string : undefined}>
                     <button
                       className={styles.fieldLink}
@@ -80,7 +84,7 @@ const getTypes = (
                     <span>&#40;</span>
                     {getArgs(schema, type.args, level, onButtonClick)}
                     <span>&#41;</span>
-                    <span>&#58;&#160;</span>
+                    <span>&#58; </span>
                     {getArgs(schema, type.type, level, onButtonClick)}
                   </div>
 
@@ -180,91 +184,3 @@ const getTypes = (
 };
 
 export default getTypes;
-
-const getArgs = (
-  schema: IntrospectionSchema | null,
-  args: docsFieldsType,
-  level: docsFieldsType,
-  onButtonClick: (level: docsFieldsType, prevLevelsAction: string, parentLevel?: docsFieldsType) => void,
-): ReactNode => {
-  return (
-    <>
-      {Array.isArray(args) &&
-        args.map((l) => (
-          <div key={l.name} className={styles.string}>
-            <span className={styles.redText}>{`${l.name}: `}</span>
-
-            {l.type.kind === 'NON_NULL' && 'ofType' in l.type && (
-              <>
-                {getArgs(schema, l.type.ofType, level, onButtonClick)}
-                <span>!</span>
-              </>
-            )}
-            {l.type.kind === 'LIST' && 'ofType' in l.type && (
-              <>
-                <span>&#91;</span>
-                {getArgs(schema, l.type.ofType, level, onButtonClick)}
-                <span>&#93;</span>
-              </>
-            )}
-            {l.type.ofType === null && <>{getArgs(schema, l.type, level, onButtonClick)}</>}
-            {l.defaultValue && <span>{` = ${l.defaultValue}`}</span>}
-            {'description' in l && l.descripton && <p>{`${l.description}`}</p>}
-          </div>
-        ))}
-      {!Array.isArray(args) &&
-        args &&
-        (('kind' in args && args.kind === 'LIST' && 'ofType' in args && (
-          <>
-            <span>&#91;</span>
-            {getArgs(schema, args.ofType, level, onButtonClick)}
-            <span>&#93;</span>
-          </>
-        )) ||
-          ('type' in args && args.type.kind === 'LIST' && 'ofType' in args.type && (
-            <>
-              <span>&#91;</span>
-              {getArgs(schema, args.type.ofType, level, onButtonClick)}
-              <span>&#93;</span>
-            </>
-          )) ||
-          ('kind' in args && args.kind === 'NON_NULL' && 'ofType' in args && (
-            <>
-              {getArgs(schema, args.ofType, level, onButtonClick)}
-              <span>!</span>
-            </>
-          )) ||
-          ('ofType' in args && args.ofType === null && 'name' in args && (
-            <button
-              className={styles.link}
-              onClick={() =>
-                handleButtonClick(
-                  onButtonClick,
-                  schema && schema.types.filter((t) => t.name === args.name)[0],
-                  'add',
-                  level,
-                )
-              }
-            >
-              {`${args.name}`}
-            </button>
-          )) ||
-          ('description' in args && args.description && <p>{`${args.description}`}</p>) ||
-          ('type' in args && 'name' in args.type && args.type.kind === 'SCALAR' && (
-            <button
-              className={styles.link}
-              onClick={() =>
-                handleButtonClick(
-                  onButtonClick,
-                  schema && schema.types.filter((t) => t.name === args.type.kind)[0],
-                  'add',
-                  level,
-                )
-              }
-            >
-              {`${args.name}`}
-            </button>
-          )))}
-    </>
-  );
-};

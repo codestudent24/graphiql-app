@@ -1,35 +1,29 @@
-import { IntrospectionQuery, IntrospectionSchema, getIntrospectionQuery } from 'graphql';
-
-/* export function useSchemaFetcher() {
-  return async function fetcher(url: string): Promise<IntrospectionQuery> {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query: getIntrospectionQuery() }),
-    });
-
-    const data: IntrospectionQuery = await response.json();
-    console.log('GraphQL Schema:', data);
-    return data;
-  };
-}
- */
+import { IntrospectionQuery, getIntrospectionQuery } from 'graphql';
+import { useAppDispatch } from '../../../../app/appHooks';
+import { setSchema } from '../../../../app/rootSlice';
 
 interface IIntrospectionQuery {
   data: IntrospectionQuery;
 }
 
-export async function schemaFetcher(url: string): Promise<IntrospectionSchema> {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query: getIntrospectionQuery() }),
-  });
+export function useSchemaFetcher() {
+  const dispatch = useAppDispatch();
+  return async function (url: string) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: getIntrospectionQuery() }),
+      });
 
-  const data: IIntrospectionQuery = await response.json();
-  return data.data.__schema;
+      const data: IIntrospectionQuery = await response.json();
+      const result = data.data.__schema;
+      dispatch(setSchema(result));
+      return true;
+    } catch (error) {
+      console.error('Error fetching schema:', error);
+    }
+  };
 }
