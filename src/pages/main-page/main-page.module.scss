@@ -1,9 +1,5 @@
-.queryContainer {
+.main {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.queryContainer > * {
-  width: 30%;
+  flex-direction: column;
+  height: calc(100vh - 102px);
 }

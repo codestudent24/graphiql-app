@@ -1,16 +1,18 @@
 import CodeMirror, { EditorState, EditorView } from '@uiw/react-codemirror';
+import { linter } from '@codemirror/lint';
+import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { useAppSelector } from '../../../../app/appHooks';
-import prettifyResponseData from './model/prettifyResponseData';
+import { myTheme } from '../../../../shared/codemirrorTheme';
+
+const LinterExtension = linter(jsonParseLinter());
 
 export default function Results() {
-  //   const defaultValue = `{
-  //   name: "Rick"
-  // }`;
   const { responseData } = useAppSelector((state) => state.root);
   return (
     <CodeMirror
-      value={prettifyResponseData(responseData)}
-      extensions={[EditorView.editable.of(false), EditorState.readOnly.of(true)]}
+      value={responseData}
+      theme={myTheme}
+      extensions={[EditorView.editable.of(false), EditorState.readOnly.of(true), json(), LinterExtension]}
     />
   );
 }

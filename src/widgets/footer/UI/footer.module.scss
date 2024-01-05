@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  font-weight: 600;
+  color: white;
+  background-color: black;
+  border-radius: 10px 10px 0 0;
+
+  padding: 10px 15px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  .gitHub {
+    transform: scale(1.5);
+    width: 30px;
+    transition: 0.5s;
+    &:hover {
+      transform: scale(1.5) rotate(10deg);
+    }
+  }
+  img {
+    background-color: white;
+    border-radius: 5px;
+    width: 50px;
+    padding: 5px;
+
+    transition: 0.5s;
+    &:hover {
+      transform: rotate(5deg);
+    }
+  }
+}
