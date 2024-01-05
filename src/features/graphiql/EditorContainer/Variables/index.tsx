@@ -7,17 +7,17 @@ import { setVariableValue } from '../../../../app/rootSlice';
 import { useAppDispatch, useAppSelector } from '../../../../app/appHooks';
 import { myTheme } from '../../../../shared/codemirrorTheme';
 import ErrorList from '../../../ErrorList';
+import { parseObjFromStorage } from './model/parseObjFromStorage';
 
 import styles from './UI/variables.module.scss';
 
-const initialVars = `{
-  "id": "1"
-}`;
+const initialVars = `{"id": "1"}`;
 
 export default memo(function Variables() {
   const { variables } = useAppSelector((state) => state.root);
+  const formatedVars = parseObjFromStorage(variables);
 
-  const [varsInput, setVarsInput] = useState(initialVars);
+  const [varsInput, setVarsInput] = useState(variables.length ? formatedVars : initialVars);
   const [varsErrors, setVarsErrors] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
@@ -50,7 +50,7 @@ export default memo(function Variables() {
   }, [dispatch, setVarsErrors, varsInput, variables]);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <CodeMirror
         className={styles.editor}
         value={varsInput}
@@ -59,6 +59,6 @@ export default memo(function Variables() {
         extensions={[json(), LinterExtension]}
       />
       {varsErrors.length > 0 && <ErrorList errors={varsErrors} />}
-    </>
+    </div>
   );
 });

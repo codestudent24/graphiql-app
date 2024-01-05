@@ -37,7 +37,7 @@ export default function Headers() {
   const LinterExtension = linter(jsonParseLinter());
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <CodeMirror
         className={styles.editor}
         value={headersInput}
@@ -46,6 +46,6 @@ export default function Headers() {
         extensions={[json(), LinterExtension]}
       />
       {headersErrors.length > 0 && <ErrorList errors={headersErrors} />}
-    </>
+    </div>
   );
 }
