@@ -18,10 +18,10 @@ const getArgs = (
             <span className={styles.redText}>{`${l.name}: `}</span>
 
             {l.type.kind === 'NON_NULL' && 'ofType' in l.type && (
-              <>
+              <div className={styles.string}>
                 {getArgs(schema, l.type.ofType, level, onButtonClick)}
                 <span>!</span>
-              </>
+              </div>
             )}
             {l.type.kind === 'LIST' && 'ofType' in l.type && (
               <>
@@ -52,10 +52,10 @@ const getArgs = (
             </>
           )) ||
           ('kind' in args && args.kind === 'NON_NULL' && 'ofType' in args && (
-            <>
+            <div className={styles.string}>
               {getArgs(schema, args.ofType, level, onButtonClick)}
               <span>!</span>
-            </>
+            </div>
           )) ||
           ('ofType' in args && args.ofType === null && 'name' in args && (
             <button

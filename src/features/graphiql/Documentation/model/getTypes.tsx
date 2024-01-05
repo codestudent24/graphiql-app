@@ -2,7 +2,6 @@ import { IntrospectionSchema } from 'graphql';
 import { docsFieldsType } from '..';
 import getArgs from './getArgs';
 import styles from '../styles.module.scss';
-import { startTransition } from 'react';
 
 export const handleButtonClick = (
   onButtonClick: (level: docsFieldsType, prevLevelsAction: string, prevLevel?: docsFieldsType) => void,
@@ -10,9 +9,7 @@ export const handleButtonClick = (
   prevLevelsAction: string,
   prevLevel?: docsFieldsType,
 ) => {
-  startTransition(() => {
-    onButtonClick(currLevel, prevLevelsAction, prevLevel);
-  });
+  onButtonClick(currLevel, prevLevelsAction, prevLevel);
 };
 
 const getTypes = (
