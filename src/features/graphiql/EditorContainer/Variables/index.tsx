@@ -50,7 +50,7 @@ export default memo(function Variables() {
   }, [dispatch, setVarsErrors, varsInput, variables]);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <CodeMirror
         className={styles.editor}
         value={varsInput}
@@ -59,6 +59,6 @@ export default memo(function Variables() {
         extensions={[json(), LinterExtension]}
       />
       {varsErrors.length > 0 && <ErrorList errors={varsErrors} />}
-    </>
+    </div>
   );
 });

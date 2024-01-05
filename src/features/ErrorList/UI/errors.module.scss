@@ -1,6 +1,22 @@
 .errors {
-  margin: 10px 0;
-  padding: 0 10px;
-  color: red;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin: 0;
+  padding: 0;
   list-style: none;
+  font-size: 15px;
+  font-weight: 600;
+
+  margin-top: 10px;
+
+  li {
+    display: inline;
+    color: red;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 5px 5px;
+  }
 }
