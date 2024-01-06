@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { IntrospectionSchema } from 'graphql';
-import { mockSchema, mockLevel, mockScalarLevel } from './Mocks/mockSchema';
+import { mockSchema, mockLevel } from './Mocks/mockSchema';
 //import DocumentationContainer from '../../features/graphiql/Documentation';
 
 import getTypes from '../../features/graphiql/Documentation/model/getTypes';
