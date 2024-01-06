@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface authState {
+export interface IAuthState {
   email: string | null;
   uid: string | null;
   isAnonymous: boolean;
 }
 
-const initialState: authState = {
+const initialState: IAuthState = {
   email: null,
   uid: null,
   isAnonymous: true,
