@@ -20,6 +20,7 @@ export function useSchemaFetcher() {
 
       const data: IIntrospectionQuery = await response.json();
       const result = data.data.__schema;
+
       dispatch(setSchema(result));
       return true;
     } catch (error) {
