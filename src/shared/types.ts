@@ -3,3 +3,15 @@ export type VariableInfoType = {
   type: string[];
   value: string | number | boolean | null;
 };
+
+type errorElement = {
+  message: string;
+  domain: string;
+  reason: string;
+};
+
+export interface NetworkError {
+  code: number;
+  message: string;
+  errors?: errorElement[];
+}

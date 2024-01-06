@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../app/appHooks';
 import useUrlHook from './model/useUrlHook';
 import styles from './UI/URL.module.scss';
-import commonStyles from '../../../shared/common.module.scss';
 
 export default function InputURL() {
   const { url } = useAppSelector((state) => state.root);
@@ -17,9 +16,7 @@ export default function InputURL() {
           setInput(e.target.value);
         }}
       />
-      <button className={commonStyles.button} onClick={() => handleURL(input)}>
-        submit
-      </button>
+      <button onClick={() => handleURL(input)}>submit</button>
     </div>
   );
 }

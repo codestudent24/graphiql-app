@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { register } from '../model/register';
+import styles from '../../auth.module.scss';
 
 export function Register() {
   const [error, setError] = useState<string>('');
@@ -12,7 +13,7 @@ export function Register() {
   };
 
   return (
-    <div className="signup">
+    <div className={styles.authContainer}>
       <h4>still has no account?</h4>
       <h3>Sign Up</h3>
       <input placeholder="e-mail" ref={registerMail} />

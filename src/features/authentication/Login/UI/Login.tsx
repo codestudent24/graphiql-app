@@ -1,19 +1,22 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { login } from '../model/login';
+import styles from '../../auth.module.scss';
 
 export function Login() {
+  const [error, setError] = useState('');
   const loginMail = useRef<HTMLInputElement>(null);
   const loginPassword = useRef<HTMLInputElement>(null);
 
   return (
     <>
-      <div className="signin">
+      <div className={styles.authContainer}>
         <h3>Sign In</h3>
         <input placeholder="e-mail" ref={loginMail} />
         <input placeholder="password" ref={loginPassword} />
+        {error && <p>{error}</p>}
         <button
           onClick={() => {
-            login(loginMail, loginPassword);
+            login(loginMail, loginPassword, setError);
           }}
         >
           sign in
