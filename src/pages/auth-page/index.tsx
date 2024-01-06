@@ -11,10 +11,13 @@ import { Login } from '../../features/authentication/Login';
 import { useEffect } from 'react';
 
 import styles from './auth-page.module.scss';
+import { useLanguage } from '../../features/language/use-language';
 
 const CURRENT_USER = 'currentUser';
 
 export default function AuthPage() {
+  const { language } = useLanguage();
+
   const { isAnonymous } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -40,8 +43,8 @@ export default function AuthPage() {
 
   return (
     <div className={styles.auth}>
-      <Login />
-      <Register />
+      <Login language={language} />
+      <Register language={language} />
     </div>
   );
 }
