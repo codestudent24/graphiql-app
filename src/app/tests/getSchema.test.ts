@@ -39,11 +39,16 @@ describe('useSchemaFetcher', () => {
   });
 
   it('handles error gracefully', async () => {
-    global.fetch = jest.fn(() => Promise.reject('mocked error'));
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    consoleErrorSpy.mockImplementation(() => {});
+
+    (global.fetch as jest.Mock).mockImplementation(() => Promise.reject('mocked error'));
 
     const fetcher = useSchemaFetcher();
     const result = await fetcher('https://rickandmortyapi.com/graphql');
 
     expect(result).toBeFalsy();
+
+    consoleErrorSpy.mockRestore();
   });
 });
