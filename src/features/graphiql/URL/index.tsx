@@ -6,11 +6,18 @@ import useUrlHook from './model/useUrlHook';
 import styles from './UI/URL.module.scss';
 import commonStyles from '../../../shared/common.module.scss';
 import { useSchemaFetcher } from '../Documentation/model/getShema';
+import { message } from 'antd';
 
 interface InputURLProps {
   language: string;
   handleDocsIconClick: (prop?: boolean) => void;
 }
+
+const errorEn = 'Wrong endpoint!';
+const errorRu = 'Неверный адрес!';
+
+const succesEn = 'Endpoint accepted';
+const succesRu = 'Адрес принят!';
 
 export default function InputURL({ language, handleDocsIconClick }: InputURLProps) {
   const isEn = language === 'EN';
@@ -31,14 +38,16 @@ export default function InputURL({ language, handleDocsIconClick }: InputURLProp
     handleDocsIconClick();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (input !== url) {
       setIsDocsIconVisible(false);
     }
     handleDocsIconClick(false);
     handleURL(input);
 
-    handleSchema(input);
+    const response = await handleSchema(input);
+    if (!response) message.error(isEn ? errorEn : errorRu);
+    else message.success(isEn ? succesEn : succesRu);
   };
 
   return (

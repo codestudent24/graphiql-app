@@ -24,7 +24,7 @@ export default function Toolbar({ language, isEditable, setIsEditable }: Toolbar
           if (request) fetcher(request, headers, url);
         }}
       >
-        {isEn ? 'Go' : 'Запустить'}
+        {isEn ? 'Go' : 'Отправить'}
       </button>
       {isEditable && <PrettifyButton language={language} />}
       <button
