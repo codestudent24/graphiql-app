@@ -13,7 +13,7 @@ export function DevBlock({ language }: DevBlockProps) {
   const developers = [
     { nick: 'asmat1k', name: isEn ? 'Tim Dobrov' : 'Тима Добров' },
     { nick: 'codestudent24', name: isEn ? 'Denis Goncharenko' : 'Денис Гончаренко' },
-    { nick: 'Irina0313', name: isEn ? 'Iryna Kanavalchuk' : 'Ирина Кавальчук' },
+    { nick: 'Irina0313', name: isEn ? 'Iryna Kanavalchuk' : 'Ирина Канавальчук' },
     { nick: 'rolling-scopes-school', name: isEn ? 'React Course' : 'React курс' },
   ];
 

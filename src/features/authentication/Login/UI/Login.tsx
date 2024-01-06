@@ -13,7 +13,7 @@ export function Login() {
         <h3>Sign In</h3>
         <input placeholder="e-mail" ref={loginMail} />
         <input placeholder="password" ref={loginPassword} />
-        {error && <p>{error}</p>}
+        <div className={styles.errors}>{error && <p className={styles.error}>{error}</p>}</div>
         <button
           onClick={() => {
             login(loginMail, loginPassword, setError);

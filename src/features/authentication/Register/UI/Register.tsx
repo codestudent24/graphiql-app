@@ -14,12 +14,11 @@ export function Register() {
 
   return (
     <div className={styles.authContainer}>
-      <h4>still has no account?</h4>
       <h3>Sign Up</h3>
       <input placeholder="e-mail" ref={registerMail} />
       <input placeholder="password" ref={registerPassword} />
+      <div className={styles.errors}>{error && <p className={styles.error}>{error}</p>}</div>
       <button onClick={handleClick}>sign up</button>
-      <p style={{ color: 'red' }}>{error}</p>
     </div>
   );
 }

@@ -7,6 +7,8 @@ import { makeVariables } from './model/handleVariables';
 import { myTheme } from '../../../../shared/codemirrorTheme';
 import ErrorList from '../../../ErrorList';
 
+import styles from './UI/editor.module.scss';
+
 export default function Editor() {
   const [errors, setErrors] = useState<string[]>([]);
   const { requestData } = useAppSelector((state) => state.root);
@@ -26,14 +28,15 @@ export default function Editor() {
   }, [requestData, setErrors, dispatch]);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <CodeMirror
+        className={styles.editor}
         value={requestData}
         onChange={onChange}
         theme={myTheme}
         extensions={[javascript({ typescript: true })]}
       />
       <ErrorList errors={errors} />
-    </>
+    </div>
   );
 }
