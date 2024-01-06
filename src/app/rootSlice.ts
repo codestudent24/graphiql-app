@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IntrospectionSchema } from 'graphql';
 import { VariableInfoType } from '../shared/types';
+import { Draft } from 'immer';
 
 interface authState {
   url: string;
@@ -7,6 +9,7 @@ interface authState {
   responseData: string;
   variables: VariableInfoType[];
   headers: string;
+  schema: IntrospectionSchema | null;
 }
 
 interface ISetVariableValue {
@@ -28,6 +31,7 @@ const initialState: authState = {
   responseData: '',
   variables: [],
   headers: '',
+  schema: null,
 };
 
 export const rootSlice = createSlice({
@@ -68,6 +72,9 @@ export const rootSlice = createSlice({
     removeHeaders: (state) => {
       state.headers = '';
     },
+    setSchema: (state, action: PayloadAction<IntrospectionSchema | null>) => {
+      state.schema = action.payload ? createWritableDraft(action.payload) : null;
+    },
   },
 });
 
@@ -83,6 +90,11 @@ export const {
   removeVariables,
   setHeaders,
   removeHeaders,
+  setSchema,
 } = rootSlice.actions;
 
 export default rootSlice.reducer;
+
+function createWritableDraft<T>(draft: T): Draft<T> {
+  return draft as Draft<T>;
+}

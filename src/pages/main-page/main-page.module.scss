@@ -1,5 +1,12 @@
-.main {
+.mainWrapper {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 112px);
+  flex: 1;
+  max-height: calc(100vh - 100px);
+}
+
+.editor {
+  display: flex;
+  flex: 1;
+  height: calc(100% - 47.5px);
 }
