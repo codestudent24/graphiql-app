@@ -5,13 +5,17 @@ import { useFetcher } from './model/useFetcherHook';
 import styles from './UI/toolbar.module.scss';
 
 type ToolbarProps = {
+  language: string;
   isEditable: boolean;
   setIsEditable: (value: boolean) => void;
 };
 
-export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
+export default function Toolbar({ language, isEditable, setIsEditable }: ToolbarProps) {
+  const isEn = language === 'EN';
+
   const { url, requestData, variables, headers } = useAppSelector((state) => state.root);
   const fetcher = useFetcher();
+
   return (
     <div className={styles.toolbar}>
       <button
@@ -20,15 +24,15 @@ export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
           if (request) fetcher(request, headers, url);
         }}
       >
-        Go
+        {isEn ? 'Go' : 'Запустить'}
       </button>
-      {isEditable && <PrettifyButton />}
+      {isEditable && <PrettifyButton language={language} />}
       <button
         onClick={() => {
           setIsEditable(!isEditable);
         }}
       >
-        {isEditable ? 'Results' : 'Editor'}
+        {isEditable ? (isEn ? 'Results' : 'Результаты') : isEn ? 'Editor' : 'Редактор'}
       </button>
     </div>
   );

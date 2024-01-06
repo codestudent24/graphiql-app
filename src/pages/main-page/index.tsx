@@ -6,6 +6,7 @@ import InputURL from '../../features/graphiql/URL';
 import EditorContainer from '../../features/graphiql/EditorContainer';
 import styles from './main-page.module.scss';
 import commonStyles from '../../shared/common.module.scss';
+import { useLanguage } from '../../features/language/use-language';
 
 const DocumentationContainer = lazy(() => import('../../features/graphiql/Documentation'));
 
@@ -14,6 +15,8 @@ export default function MainPage() {
   const auth = getAuth();
   const { isAnonymous } = useAppSelector((state) => state.auth);
   const [isDocsVisible, setIsDocsVisible] = useState(false);
+
+  const { language } = useLanguage();
 
   useEffect(() => {
     if (isAnonymous) navigate('/auth');
@@ -37,14 +40,14 @@ export default function MainPage() {
 
   return (
     <div className={`${styles.mainWrapper} ${commonStyles.wrapper} `}>
-      <InputURL handleDocsIconClick={handleDocsIconClick} />
+      <InputURL language={language} handleDocsIconClick={handleDocsIconClick} />
       <div className={styles.editor}>
         {isDocsVisible && (
           <Suspense fallback={<div style={{ color: 'white' }}>Loading Documentation...</div>}>
             <DocumentationContainer />
           </Suspense>
         )}
-        <EditorContainer />
+        <EditorContainer language={language} />
       </div>
     </div>
   );

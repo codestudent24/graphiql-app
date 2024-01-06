@@ -8,10 +8,13 @@ import commonStyles from '../../../shared/common.module.scss';
 import { useSchemaFetcher } from '../Documentation/model/getShema';
 
 interface InputURLProps {
+  language: string;
   handleDocsIconClick: (prop?: boolean) => void;
 }
 
-export default function InputURL({ handleDocsIconClick }: InputURLProps) {
+export default function InputURL({ language, handleDocsIconClick }: InputURLProps) {
+  const isEn = language === 'EN';
+
   const { url } = useAppSelector((state) => state.root);
   const [input, setInput] = useState<string>(url);
   const handleURL = useUrlHook();
@@ -49,7 +52,7 @@ export default function InputURL({ handleDocsIconClick }: InputURLProps) {
         }}
       />
       <button className={commonStyles.button} onClick={handleSubmit}>
-        submit
+        {isEn ? 'Submit' : 'Отправить'}
       </button>
     </div>
   );
