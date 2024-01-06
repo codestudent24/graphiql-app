@@ -3,7 +3,6 @@ import PrettifyButton from '../PrettifyButton';
 import replaceVariables from './model/replaceVariables';
 import { useFetcher } from './model/useFetcherHook';
 import styles from './UI/toolbar.module.scss';
-import commonStyles from '../../../../shared/common.module.scss';
 
 type ToolbarProps = {
   isEditable: boolean;
@@ -16,7 +15,6 @@ export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
   return (
     <div className={styles.toolbar}>
       <button
-        className={commonStyles.button}
         onClick={() => {
           const request = replaceVariables(requestData, variables);
           if (request) fetcher(request, headers, url);
@@ -26,7 +24,6 @@ export default function Toolbar({ isEditable, setIsEditable }: ToolbarProps) {
       </button>
       {isEditable && <PrettifyButton />}
       <button
-        className={commonStyles.button}
         onClick={() => {
           setIsEditable(!isEditable);
         }}

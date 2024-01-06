@@ -10,6 +10,8 @@ import { Register } from '../../features/authentication/Register';
 import { Login } from '../../features/authentication/Login';
 import { useEffect } from 'react';
 
+import styles from './auth-page.module.scss';
+
 const CURRENT_USER = 'currentUser';
 
 export default function AuthPage() {
@@ -37,7 +39,7 @@ export default function AuthPage() {
   });
 
   return (
-    <div className="auth">
+    <div className={styles.auth}>
       <Login />
       <Register />
     </div>
