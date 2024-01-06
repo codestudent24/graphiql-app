@@ -70,3 +70,22 @@ p {
 .redText {
   color: rgb(255, 107, 139);
 }
+
+@media (max-width: 585px) {
+  .docsContainer {
+    width: 50%;
+  }
+}
+
+@media (max-width: 430px) {
+  .docsContainer {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+
+    border: 0;
+
+    min-width: 100%;
+    max-height: 100%;
+  }
+}
