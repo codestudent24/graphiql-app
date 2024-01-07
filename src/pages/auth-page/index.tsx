@@ -38,6 +38,7 @@ export default function AuthPage() {
           uid: currentUser.uid,
         }),
       );
+      navigate('/main');
     }
   });
 
