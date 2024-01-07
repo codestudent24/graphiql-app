@@ -5,6 +5,9 @@ import InputURL from '../../features/graphiql/URL';
 
 describe('URL render correct', () => {
   it('base url is correct', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    consoleErrorSpy.mockImplementation(() => {});
+
     const { getByText, getByRole } = render(
       <Provider store={store}>
         <InputURL handleDocsIconClick={() => {}} language="EN" />
@@ -16,5 +19,6 @@ describe('URL render correct', () => {
     const input = getByRole('textbox') as HTMLInputElement;
     expect(input).not.toBeNull();
     expect(input.value).toBe('https://rickandmortyapi.com/graphql');
+    consoleErrorSpy.mockRestore();
   });
 });

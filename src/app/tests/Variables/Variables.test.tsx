@@ -5,6 +5,8 @@ import Variables from '../../../features/graphiql/EditorContainer/Variables';
 
 describe('Variables render correct', () => {
   it('render Variables component, handle error', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    consoleErrorSpy.mockImplementation(() => {});
     const { findByText } = render(
       <Provider store={store}>
         <Variables />
@@ -12,5 +14,7 @@ describe('Variables render correct', () => {
     );
     const editorComponent = await findByText(/"id" is not defined in query/);
     expect(editorComponent).not.toBeNull();
+
+    consoleErrorSpy.mockRestore();
   });
 });

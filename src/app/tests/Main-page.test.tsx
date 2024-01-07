@@ -20,15 +20,17 @@ describe('Variables render correct', () => {
     initializeApp(firebaseConfig);
   });
   it('render Variables component, handle error', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    consoleErrorSpy.mockImplementation(() => {});
     const { getByText } = render(
       <BrowserRouter>
         <Provider store={store}>
           <MainPage />
         </Provider>
-        ,
       </BrowserRouter>,
     );
     const submitButton = getByText('Submit');
     expect(submitButton).not.toBeNull();
+    consoleErrorSpy.mockRestore();
   });
 });
