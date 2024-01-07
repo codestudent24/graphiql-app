@@ -23,6 +23,7 @@ const getArgs = (
                 <span>!</span>
               </div>
             )}
+
             {l.type.kind === 'LIST' && 'ofType' in l.type && (
               <>
                 <span>&#91;</span>
@@ -30,11 +31,13 @@ const getArgs = (
                 <span>&#93;</span>
               </>
             )}
+
             {l.type.ofType === null && <>{getArgs(schema, l.type, level, onButtonClick)}</>}
             {l.defaultValue && <span>&#160;&#61;&#160;{`${l.defaultValue}`}</span>}
             {'description' in l && l.descripton && <p>{`${l.description}`}</p>}
           </div>
         ))}
+
       {!Array.isArray(args) &&
         args &&
         (('kind' in args && args.kind === 'LIST' && 'ofType' in args && (

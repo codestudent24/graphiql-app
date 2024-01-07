@@ -23,7 +23,6 @@ describe('checkVariables function', () => {
     ];
 
     const result = checkVariables(parsedInput, variables);
-    console.log('result', result);
 
     expect(result.variablesSet).toHaveLength(3);
     expect(result.variablesSet[0]).toEqual({

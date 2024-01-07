@@ -60,10 +60,16 @@ export default function InputURL({ language, handleDocsIconClick }: InputURLProp
 
   return (
     <div className={styles.urlContainer}>
-      {isDocsIconVisible && <BookOutlined className={styles.docsIcon} title="Docs" onClick={handleIconClick} />}
+      {isDocsIconVisible && (
+        <BookOutlined
+          className={styles.docsIcon}
+          title={language === 'EN' ? 'Docs' : 'Документация'}
+          onClick={handleIconClick}
+        />
+      )}
       <input
         defaultValue={url}
-        placeholder="enter graphql endpoint url"
+        placeholder={language === 'EN' ? 'enter graphql endpoint url' : 'введите URL адрес АПИ'}
         onChange={(e) => {
           setInput(e.target.value);
         }}

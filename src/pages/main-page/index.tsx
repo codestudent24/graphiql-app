@@ -28,6 +28,7 @@ export default function MainPage() {
         if (currentDate > expirationDate) navigate('/');
       }
     }
+
     if (isAnonymous) {
       navigate('/');
     } else {
