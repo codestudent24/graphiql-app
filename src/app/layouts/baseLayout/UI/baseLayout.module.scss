@@ -3,6 +3,8 @@
   justify-content: center;
 
   flex: 1 0 auto;
-
-  padding: 0 calc(20px - (100vw - 100%));
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
