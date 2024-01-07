@@ -1,26 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { BookOutlined } from '@ant-design/icons';
-import { useAppSelector } from '../../../app/appHooks';
+import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import useUrlHook from './model/useUrlHook';
 import styles from './UI/URL.module.scss';
 import commonStyles from '../../../shared/common.module.scss';
 import { useSchemaFetcher } from '../Documentation/model/getShema';
+import { message } from 'antd';
+import { setSchema } from '../../../app/rootSlice';
 
 interface InputURLProps {
+  language: string;
   handleDocsIconClick: (prop?: boolean) => void;
 }
 
-export default function InputURL({ handleDocsIconClick }: InputURLProps) {
+const errorEn = 'Wrong endpoint!';
+const errorRu = 'Неверный адрес!';
+
+const succesEn = 'Endpoint accepted';
+const succesRu = 'Адрес принят!';
+
+export default function InputURL({ language, handleDocsIconClick }: InputURLProps) {
+  const isEn = language === 'EN';
+
   const { url } = useAppSelector((state) => state.root);
   const [input, setInput] = useState<string>(url);
   const handleURL = useUrlHook();
   const handleSchema = useSchemaFetcher();
   const [isDocsIconVisible, setIsDocsIconVisible] = useState(false);
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    handleSchema(url).then(() => {
-      setIsDocsIconVisible(true);
+    handleSchema(url).then((data) => {
+      data && setIsDocsIconVisible(true);
     });
   }, [url]);
 
@@ -28,14 +41,21 @@ export default function InputURL({ handleDocsIconClick }: InputURLProps) {
     handleDocsIconClick();
   };
 
-  const handleSubmit = () => {
-    if (input !== url) {
-      setIsDocsIconVisible(false);
-    }
+  const handleSubmit = async () => {
+    setIsDocsIconVisible(false);
+    dispatch(setSchema(null));
+
     handleDocsIconClick(false);
     handleURL(input);
 
-    handleSchema(input);
+    const response = await handleSchema(input);
+
+    if (!response) {
+      message.error(isEn ? errorEn : errorRu);
+    } else {
+      setIsDocsIconVisible(true);
+      message.success(isEn ? succesEn : succesRu);
+    }
   };
 
   return (
@@ -49,7 +69,7 @@ export default function InputURL({ handleDocsIconClick }: InputURLProps) {
         }}
       />
       <button className={commonStyles.button} onClick={handleSubmit}>
-        submit
+        {isEn ? 'Submit' : 'Отправить'}
       </button>
     </div>
   );

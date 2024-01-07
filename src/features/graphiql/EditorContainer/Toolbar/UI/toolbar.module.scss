@@ -1,6 +1,5 @@
 .toolbar {
-  margin: 8px 0;
-  padding: 8px;
+  margin: 10px 0;
   width: fit-content;
   border-radius: 10px;
   font-weight: 700;
@@ -12,8 +11,6 @@
     text-transform: uppercase;
     border: 0;
     border-radius: 10px;
-    margin-right: 10px;
-    padding: 5px 10px;
     transition: 0.4s;
     &:hover {
       background-color: rgba(128, 128, 128, 0.39);

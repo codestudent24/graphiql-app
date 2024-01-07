@@ -2,7 +2,13 @@ import { useRef, useState } from 'react';
 import { login } from '../model/login';
 import styles from '../../auth.module.scss';
 
-export function Login() {
+interface LoginProps {
+  language: string;
+}
+
+export function Login({ language }: LoginProps) {
+  const isEn = language === 'EN';
+
   const [error, setError] = useState('');
   const loginMail = useRef<HTMLInputElement>(null);
   const loginPassword = useRef<HTMLInputElement>(null);
@@ -10,10 +16,10 @@ export function Login() {
   return (
     <>
       <div className={styles.authContainer}>
-        <h3>Sign In</h3>
-        <input placeholder="e-mail" ref={loginMail} />
-        <input placeholder="password" ref={loginPassword} />
-        {error && <p>{error}</p>}
+        <h3>{isEn ? 'Sign In' : 'Войти'}</h3>
+        <input placeholder={isEn ? 'e-mail' : 'почта'} ref={loginMail} />
+        <input placeholder={isEn ? 'password' : 'пароль'} ref={loginPassword} />
+        <div className={styles.errors}>{error && <p className={styles.error}>{error}</p>}</div>
         <button
           onClick={() => {
             if (loginMail.current && loginPassword.current) {
@@ -21,7 +27,7 @@ export function Login() {
             }
           }}
         >
-          sign in
+          {isEn ? 'Sign In' : 'Войти'}
         </button>
       </div>
     </>

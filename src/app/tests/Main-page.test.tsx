@@ -28,7 +28,7 @@ describe('Variables render correct', () => {
         ,
       </BrowserRouter>,
     );
-    const submitButton = getByText('submit');
+    const submitButton = getByText('Submit');
     expect(submitButton).not.toBeNull();
   });
 });

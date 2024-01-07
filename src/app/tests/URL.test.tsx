@@ -7,10 +7,10 @@ describe('URL render correct', () => {
   it('base url is correct', () => {
     const { getByText, getByRole } = render(
       <Provider store={store}>
-        <InputURL handleDocsIconClick={() => {}} />
+        <InputURL handleDocsIconClick={() => {}} language="EN" />
       </Provider>,
     );
-    const submitButton = getByText('submit');
+    const submitButton = getByText('Submit');
     expect(submitButton).not.toBeNull();
 
     const input = getByRole('textbox') as HTMLInputElement;

@@ -25,6 +25,7 @@ export function useSchemaFetcher() {
       return true;
     } catch (error) {
       console.error('Error fetching schema:', error);
+      return false;
     }
   };
 }

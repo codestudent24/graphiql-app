@@ -10,7 +10,7 @@ describe('Toolbar', () => {
     const { getByText } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Toolbar isEditable={false} setIsEditable={() => {}} />
+          <Toolbar isEditable={false} setIsEditable={() => {}} language="EN" />
         </Provider>
       </BrowserRouter>,
     );
@@ -28,7 +28,7 @@ describe('Toolbar', () => {
     const { getByText } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Toolbar isEditable={false} setIsEditable={() => {}} />
+          <Toolbar isEditable={false} setIsEditable={() => {}} language="EN" />
         </Provider>
       </BrowserRouter>,
     );
@@ -44,7 +44,7 @@ describe('Toolbar', () => {
     const { getByText } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Toolbar isEditable={false} setIsEditable={() => {}} />
+          <Toolbar isEditable={false} setIsEditable={() => {}} language="EN" />
         </Provider>
       </BrowserRouter>,
     );

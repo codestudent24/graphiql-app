@@ -41,10 +41,7 @@ describe('make variables from editor input', () => {
     const result = checkVariables(inputWithErrors, variables);
     const correctResult = {
       errors: ['"firstName" is not defined in query', '"isTrue" should be of type boolean'],
-      variablesSet: [
-        { name: 'id', type: ['string'], value: '1' },
-        { name: 'isTrue', type: ['boolean'], value: null },
-      ],
+      variablesSet: [{ name: 'id', type: ['string'], value: '1' }],
     };
     expect(result).toEqual(correctResult);
   });
