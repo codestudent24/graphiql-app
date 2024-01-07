@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { BookOutlined } from '@ant-design/icons';
-import { useAppSelector } from '../../../app/appHooks';
+import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import useUrlHook from './model/useUrlHook';
 import styles from './UI/URL.module.scss';
 import commonStyles from '../../../shared/common.module.scss';
 import { useSchemaFetcher } from '../Documentation/model/getShema';
 import { message } from 'antd';
+import { setSchema } from '../../../app/rootSlice';
 
 interface InputURLProps {
   language: string;
@@ -28,9 +29,11 @@ export default function InputURL({ language, handleDocsIconClick }: InputURLProp
   const handleSchema = useSchemaFetcher();
   const [isDocsIconVisible, setIsDocsIconVisible] = useState(false);
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    handleSchema(url).then(() => {
-      setIsDocsIconVisible(true);
+    handleSchema(url).then((data) => {
+      data && setIsDocsIconVisible(true);
     });
   }, [url]);
 
@@ -39,15 +42,20 @@ export default function InputURL({ language, handleDocsIconClick }: InputURLProp
   };
 
   const handleSubmit = async () => {
-    if (input !== url) {
-      setIsDocsIconVisible(false);
-    }
+    setIsDocsIconVisible(false);
+    dispatch(setSchema(null));
+
     handleDocsIconClick(false);
     handleURL(input);
 
     const response = await handleSchema(input);
-    if (!response) message.error(isEn ? errorEn : errorRu);
-    else message.success(isEn ? succesEn : succesRu);
+
+    if (!response) {
+      message.error(isEn ? errorEn : errorRu);
+    } else {
+      setIsDocsIconVisible(true);
+      message.success(isEn ? succesEn : succesRu);
+    }
   };
 
   return (

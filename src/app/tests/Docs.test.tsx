@@ -1,7 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { IntrospectionSchema } from 'graphql';
-import { mockSchema, mockLevel } from './Mocks/mockSchema';
-//import DocumentationContainer from '../../features/graphiql/Documentation';
+import {
+  mockSchema,
+  mockLevel,
+  mockScalarLevel,
+  mockInputObjectType,
+  mockObjectType,
+  mockENUMType,
+} from './Mocks/mockSchema';
 
 import getTypes from '../../features/graphiql/Documentation/model/getTypes';
 
@@ -63,10 +69,79 @@ describe('getTypes', () => {
     render(getTypes(schema, mockLevel, characterField, mockOnButtonClick));
 
     const backBtn = screen.getByRole('button', { name: '⟵ Query' });
-    screen.debug();
+
     expect(backBtn).toBeTruthy();
 
     fireEvent.click(backBtn);
     expect(mockOnButtonClick).toHaveBeenCalledWith(queryType, 'add', schema);
+  });
+
+  it('render skalar type with desсription', () => {
+    render(getTypes(schema, schema, mockScalarLevel, mockOnButtonClick));
+
+    expect(screen.getByRole('heading', { name: mockScalarLevel.name }));
+    const backBtn = screen.getByRole('button');
+
+    expect(backBtn).toBeTruthy();
+
+    fireEvent.click(backBtn);
+    expect(mockOnButtonClick).toHaveBeenCalledWith(mockScalarLevel, 'delete', undefined);
+  });
+
+  it('render Input Object type', () => {
+    render(getTypes(schema, schema, mockInputObjectType, mockOnButtonClick));
+
+    expect(screen.getByRole('heading', { name: mockInputObjectType.name }));
+    const backBtn = screen.getByRole('button', { name: '⟵ Docs' });
+
+    expect(backBtn).toBeTruthy();
+
+    fireEvent.click(backBtn);
+    expect(mockOnButtonClick).toHaveBeenCalledWith(mockInputObjectType, 'delete', undefined);
+
+    const inputField = mockInputObjectType.inputFields[0];
+    const typeLink = screen.getByRole('button', { name: inputField.name });
+    expect(typeLink).toBeTruthy();
+
+    fireEvent.click(typeLink);
+    expect(mockOnButtonClick).toHaveBeenCalledWith(inputField, 'add', mockInputObjectType);
+  });
+
+  it('render Object type', () => {
+    render(getTypes(schema, schema, mockObjectType, mockOnButtonClick));
+
+    expect(screen.getByRole('heading', { name: mockObjectType.name }));
+    const backBtn = screen.getByRole('button', { name: '⟵ Docs' });
+
+    expect(backBtn).toBeTruthy();
+
+    fireEvent.click(backBtn);
+    expect(mockOnButtonClick).toHaveBeenCalledWith(mockObjectType, 'delete', undefined);
+
+    const field = mockObjectType.fields[0];
+    const typeLink = screen.getByRole('button', { name: field.name });
+    expect(typeLink).toBeTruthy();
+
+    fireEvent.click(typeLink);
+    expect(mockOnButtonClick).toHaveBeenCalledWith(field, 'add', mockObjectType);
+  });
+
+  it('render ENUM type', () => {
+    render(getTypes(schema, schema, mockENUMType, mockOnButtonClick));
+
+    expect(screen.getByRole('heading', { name: mockENUMType.name }));
+    const backBtn = screen.getByRole('button', { name: '⟵ Docs' });
+
+    expect(backBtn).toBeTruthy();
+
+    fireEvent.click(backBtn);
+    expect(mockOnButtonClick).toHaveBeenCalledWith(mockENUMType, 'delete', undefined);
+
+    const enumValue = mockENUMType.enumValues[0];
+    const typeName = screen.getByText(enumValue.name);
+    expect(typeName).toBeTruthy();
+
+    const description = enumValue.description;
+    expect(description).toBeFalsy();
   });
 });

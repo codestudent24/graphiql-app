@@ -30,7 +30,7 @@ export function Header() {
   window.addEventListener('scroll', updateSticky);
 
   return (
-    <header className={`${styles.header} ${sticky && styles.headerScrolled}`}>
+    <header className={`${styles.header} ${sticky && styles.headerScrolled}`} data-testid="header">
       <div className={`${commonStyles.wrapper} ${styles.headerWrapper} ${sticky && styles.scrolledWrapper}`}>
         <div className={styles.item}>
           <Link to="/">

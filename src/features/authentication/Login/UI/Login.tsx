@@ -22,7 +22,9 @@ export function Login({ language }: LoginProps) {
         <div className={styles.errors}>{error && <p className={styles.error}>{error}</p>}</div>
         <button
           onClick={() => {
-            login(loginMail, loginPassword, setError);
+            if (loginMail.current && loginPassword.current) {
+              login(loginMail.current.value, loginPassword.current.value, setError);
+            }
           }}
         >
           {isEn ? 'Sign In' : 'Войти'}

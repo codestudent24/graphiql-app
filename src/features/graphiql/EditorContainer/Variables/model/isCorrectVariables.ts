@@ -17,7 +17,7 @@ function isCorrectValue(
   errors: string[],
 ) {
   if (variable === undefined) {
-    errors.push(`Variable "${correctName}" not defined`);
+    errors.push(`Variable "${correctName}" is not defined`);
   } else {
     if (correctTypes.indexOf(typeof variable[1]) === -1) {
       errors.push(`"${correctName}" should be of type ${correctTypes.join(' | ')}`);
@@ -36,7 +36,9 @@ export function checkVariables(parsedInput: object, variables: VariableInfoType[
     checkQueryVariables(entries, variables, errors);
     for (let i = 0; i < variables.length; i += 1) {
       const inputVariable = entries.find((el) => el[0] === variables[i].name);
+
       const value = isCorrectValue(inputVariable, variables[i].name, variables[i].type, errors);
+      value && 
       variablesSet.push({
         name: variables[i].name,
         type: variables[i].type,

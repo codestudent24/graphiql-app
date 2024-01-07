@@ -167,12 +167,11 @@ const getTypes = (
             {'enumValues' in level &&
               level.enumValues !== null &&
               level.enumValues.map((f) => (
-                <>
-                  <div key={f.name}>
-                    <p className={styles.redText}>{f.name}</p>
-                  </div>
+                <div key={f.name}>
+                  <p className={styles.redText}>{f.name}</p>
+
                   {f.description && <p>{f.description}</p>}
-                </>
+                </div>
               ))}
           </>
         )}
