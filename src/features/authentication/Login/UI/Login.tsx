@@ -16,7 +16,9 @@ export function Login() {
         {error && <p>{error}</p>}
         <button
           onClick={() => {
-            login(loginMail, loginPassword, setError);
+            if (loginMail.current && loginPassword.current) {
+              login(loginMail.current.value, loginPassword.current.value, setError);
+            }
           }}
         >
           sign in

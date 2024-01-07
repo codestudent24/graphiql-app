@@ -24,20 +24,6 @@ function checkQuery(varSet: VariableInfoType[], varArray: string[]) {
   return errors;
 }
 
-export function makeVariablesSet(request: string, setErrors: (errors: string[]) => void) {
-  const queryString = request.match(queryReg);
-  const variablesSet: VariableInfoType[] = [];
-  if (queryString !== null) {
-    const variablesString = queryString[0].replace(/ /g, '').match(/\(\$.+\)/gm);
-    if (variablesString !== null) {
-      const variablesArray = variablesString[0].slice(1, -1).split(',');
-      const errors = checkQuery(variablesSet, variablesArray);
-      setErrors(errors);
-    }
-  }
-  return variablesSet;
-}
-
 export function makeVariables(request: string) {
   const queryString = request.match(queryReg);
   const variablesSet: VariableInfoType[] = [];
