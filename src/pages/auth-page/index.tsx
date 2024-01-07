@@ -23,7 +23,7 @@ export default function AuthPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAnonymous) navigate('/');
+    if (!isAnonymous) navigate('/main');
   }, [navigate, isAnonymous]);
 
   onAuthStateChanged(auth, (currentUser) => {
