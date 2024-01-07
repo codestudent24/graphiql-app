@@ -1,0 +1,22 @@
+.errorPage {
+  margin: 20vh 0;
+  h1 {
+    font-size: 3vh;
+  }
+  button {
+    padding: 15px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 10px;
+    transition: 0.4s;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.39);
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
