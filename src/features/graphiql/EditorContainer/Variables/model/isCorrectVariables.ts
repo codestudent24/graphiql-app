@@ -38,12 +38,12 @@ export function checkVariables(parsedInput: object, variables: VariableInfoType[
       const inputVariable = entries.find((el) => el[0] === variables[i].name);
 
       const value = isCorrectValue(inputVariable, variables[i].name, variables[i].type, errors);
-      value && 
-      variablesSet.push({
-        name: variables[i].name,
-        type: variables[i].type,
-        value,
-      });
+      value &&
+        variablesSet.push({
+          name: variables[i].name,
+          type: variables[i].type,
+          value,
+        });
     }
   }
   return {
