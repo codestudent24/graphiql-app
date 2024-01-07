@@ -1,4 +1,11 @@
 .container {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerWrapper {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -6,10 +13,8 @@
 
   font-weight: 600;
   color: white;
-  background-color: black;
-  // border-radius: 10px 10px 0 0;
 
-  padding: 10px 15px;
+  padding: 10px 20px;
   a {
     color: white;
     text-decoration: none;
