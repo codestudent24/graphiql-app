@@ -19,7 +19,6 @@ export default function MainPage() {
   const { language } = useLanguage();
 
   useEffect(() => {
-    if (isAnonymous) navigate('/auth');
     async function isExpired() {
       const user = auth.currentUser;
       if (user) {
@@ -29,7 +28,11 @@ export default function MainPage() {
         if (currentDate > expirationDate) navigate('/');
       }
     }
-    isExpired();
+    if (isAnonymous) {
+      navigate('/');
+    } else {
+      isExpired();
+    }
   }, [navigate, isAnonymous, auth.currentUser]);
 
   const handleDocsIconClick = (prop?: boolean) => {
