@@ -17,7 +17,7 @@ interface ISetVariableValue {
   value: string | number | boolean | null;
 }
 
-const initialRequestData = `query ($id: String) {
+export const initialRequestData = `query ($id: String) {
   character(id: $id) {
     id
     name,
@@ -25,7 +25,7 @@ const initialRequestData = `query ($id: String) {
   }
 }`;
 
-const initialState: authState = {
+export const initialState: authState = {
   url: 'https://rickandmortyapi.com/graphql',
   requestData: initialRequestData,
   responseData: '',
