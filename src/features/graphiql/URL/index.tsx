@@ -1,17 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { BookOutlined } from '@ant-design/icons';
-import { useAppSelector } from '../../../app/appHooks';
+import { useAppDispatch, useAppSelector } from '../../../app/appHooks';
 import useUrlHook from './model/useUrlHook';
 import styles from './UI/URL.module.scss';
 import commonStyles from '../../../shared/common.module.scss';
 import { useSchemaFetcher } from '../Documentation/model/getShema';
+import { setSchema } from '../../../app/rootSlice';
 
 interface InputURLProps {
   handleDocsIconClick: (prop?: boolean) => void;
 }
 
 export default function InputURL({ handleDocsIconClick }: InputURLProps) {
+  const dispatch = useAppDispatch();
   const { url } = useAppSelector((state) => state.root);
   const [input, setInput] = useState<string>(url);
   const handleURL = useUrlHook();
@@ -19,8 +21,8 @@ export default function InputURL({ handleDocsIconClick }: InputURLProps) {
   const [isDocsIconVisible, setIsDocsIconVisible] = useState(false);
 
   useEffect(() => {
-    handleSchema(url).then(() => {
-      setIsDocsIconVisible(true);
+    handleSchema(url).then((data) => {
+      data && setIsDocsIconVisible(true);
     });
   }, [url]);
 
@@ -29,13 +31,15 @@ export default function InputURL({ handleDocsIconClick }: InputURLProps) {
   };
 
   const handleSubmit = () => {
-    if (input !== url) {
-      setIsDocsIconVisible(false);
-    }
+    setIsDocsIconVisible(false);
+    dispatch(setSchema(null));
+
     handleDocsIconClick(false);
     handleURL(input);
 
-    handleSchema(input);
+    handleSchema(input).then((data) => {
+      data && setIsDocsIconVisible(true);
+    });
   };
 
   return (

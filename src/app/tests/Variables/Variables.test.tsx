@@ -10,7 +10,7 @@ describe('Variables render correct', () => {
         <Variables />
       </Provider>,
     );
-    const editorComponent = await findByText(/"id" is not defined in query/g);
+    const editorComponent = await findByText(/"id" is not defined in query/);
     expect(editorComponent).not.toBeNull();
   });
 });
