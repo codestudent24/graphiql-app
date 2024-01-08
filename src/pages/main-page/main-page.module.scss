@@ -1,0 +1,22 @@
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-height: calc(100vh - 100px);
+  padding: 0 5px;
+}
+
+.editor {
+  position: relative;
+  display: flex;
+  flex: 1;
+  max-height: calc(100% - 47.5px);
+  background-color: rgb(28, 28, 28);
+}
+
+
+@media (max-width: 315px) {
+  .mainWrapper {
+    overflow: hidden;
+  }
+}

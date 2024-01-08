@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 0 10px;
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+}
+
+@media (max-width: 780px) {
+  .container {
+    gap: 40px;
+    .text {
+      gap: 20px;
+    }
+  }
+}

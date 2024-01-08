@@ -1,0 +1,22 @@
+.toolbar {
+  margin: 10px 0;
+  width: fit-content;
+  border-radius: 10px;
+  font-weight: 700;
+
+  button {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 10px;
+    transition: 0.4s;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.39);
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}

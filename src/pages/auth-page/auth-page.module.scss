@@ -1,0 +1,14 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  height: calc(100vh - 112px);
+}
+
+@media (max-width: 456px) {
+  .auth {
+    gap: 30px;
+  }
+}

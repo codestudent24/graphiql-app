@@ -1,0 +1,53 @@
+.urlContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  background-color: #1c1c1c;
+  border-bottom: 4px solid #3fa4ff88;
+  flex: 0;
+  gap: 10px;
+  * {
+    display: block;
+  }
+
+  input {
+    flex-grow: 2;
+    background: #0e101c;
+
+    padding: 4px 8px;
+    color: #fff;
+    &:focus {
+      color: #3fa4ff;
+    }
+  }
+
+  button {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 10px;
+    padding: 5px 10px;
+    transition: 0.4s;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.39);
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+.docsIcon {
+  transition: 0.3s ease;
+  font-size: 20px;
+
+  color: white;
+  :hover {
+    transition: 0.3s ease;
+    cursor: pointer;
+    scale: 1.1;
+  }
+}
